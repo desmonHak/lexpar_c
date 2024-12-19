@@ -1,0 +1,4 @@
+[submodule "lib/structs_data_C"]
+	path = lib/structs_data_C
+	url = https://github.com/desmonHak/structs_data_C.git
+	branch = main
