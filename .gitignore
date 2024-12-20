@@ -1,0 +1,8 @@
+*.exe
+*.elf
+*.json
+*.i
+*.s
+*.o
+.vscode
+*.json

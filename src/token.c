@@ -14,6 +14,21 @@ Token_t* create_token_with_number(const char* name_token, Object value, Token_id
     return token;
 }
 
+Token_build_t* init_token_build(Object value_process){
+    DEBUG_PRINT(DEBUG_LEVEL_INFO,
+        INIT_TYPE_FUNC_DBG(Token_build_t*  , init_token_build)
+            TYPE_DATA_DBG(Object, "value_process = %p")
+        END_TYPE_FUNC_DBG,
+        value_process);
+    Token_build_t *token_b;
+    debug_malloc(Token_build_t, token_b, sizeof(Token_build_t));
+
+    token_b->token          = NULL;
+    token_b->value_process  = value_process;
+
+    return token_b;
+}
+
 Token_t* create_token_with_autoincrement(
         const char* name_token,
         Object value,
