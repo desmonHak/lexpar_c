@@ -26,7 +26,12 @@ typedef struct Lexer_t {
     const char*            data; // datos a analizar
 } Lexer_t;
 
-typedef const Token_build_t* (*func_token_analysis)(Lexer_t* lexer);
+// tokens predefinidos
+static Token_t * token_number = NULL;
+static Token_t * token_eof    = NULL;
+static Token_t * token_id     = NULL;
+
+typedef Token_build_t* (*func_token_analysis)(Lexer_t* lexer);
 
 #include "../src/lexer.c"
 #endif

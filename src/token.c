@@ -34,6 +34,13 @@ Token_t* create_token_with_autoincrement(
         Object value,
         func_auto_increment auto_increment
     ) {
+    DEBUG_PRINT(DEBUG_LEVEL_INFO,
+        INIT_TYPE_FUNC_DBG(Token_t*  , create_token_with_autoincrement)
+            TYPE_DATA_DBG(const char*, "name_token = %s")
+            TYPE_DATA_DBG(Object, "value = %p")
+            TYPE_DATA_DBG(func_auto_increment, "auto_increment = %p")
+        END_TYPE_FUNC_DBG,
+        name_token, value, auto_increment);
 
     Token_t *token;
     debug_malloc(Token_t, token, sizeof(Token_t));

@@ -22,7 +22,7 @@ Lexer_t init_lexer(const char* data, uint64_t size) {
 Permite añadir un token a la lista de tokens
 */
 const position push_token(Lexer_t *lexer, Token_t *token) {
-    insertNode(lexer->list_id_tokens, token);
+    return push_back_v(lexer->list_id_tokens, token);
 }
 
 /*
@@ -165,6 +165,11 @@ void build_lexer(Lexer_t *lexer) {
     // hacer una tabla de hash para todos los tokens, con el tamaño de la lista de tokens
     lexer->hash_table = createHashTable(size_list_tokens);
 
+    // tokens predefinidos
+    token_number  = get(lexer->hash_table, build_token_special(TOKEN_NUMBER));
+    token_eof     = get(lexer->hash_table, build_token_special(TOKEN_EOF));
+    token_id      = get(lexer->hash_table, build_token_special(TOKEN_ID));
+
     for (position i = 0; i < size_list_tokens; i++) {
         // curent = list_id_tokens[i]
         Token_t*    current = get_element_v(lexer->list_id_tokens, i);
@@ -200,10 +205,80 @@ void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
             TYPE_DATA_DBG(func_token_analysis, "token_analysis = %p")
         END_TYPE_FUNC_DBG,
         lexer, token_analysis);
+    Lexer_t* lexer_cpy = lexer; 
     Token_build_t* tok;
-    while((tok = lexer_next_token(lexer, token_analysis))->token->value != ((Token_t*)get(lexer->hash_table, build_token_special(TOKEN_EOF)))->value){
+    
+    Token_id token_eof    = ((Token_t*)get(lexer->hash_table, build_token_special(TOKEN_EOF)))->type;
+    while((tok = lexer_next_token(lexer, token_analysis))->token->type != token_eof){
         print_token(tok->token);
+        printf_color("\tVal token: %s\n", tok->value_process);
     }
+
+    print_token(tok->token);
+    printf_color("\tVal token: %s\n", tok->value_process);
+
+    // restaurar el lexer, es necesario para poder seguir operando con el
+    restore_lexer(&lexer);
+}
+
+
+Token_build_t* lexer_parser_string(Lexer_t* lexer){
+    Token_t * type_token = NULL;
+    unsigned char * value = (unsigned char*)calloc(1, sizeof(unsigned char));
+    unsigned char caracter_prohibido = '"';
+    /*if ( 
+        lexer->src[lexer->i]   == '"' && 
+        lexer->src[lexer->i+1] == '"' && 
+        lexer->src[lexer->i+2] == '"'    
+    ) {
+        type_token = TOKEN_DOC_STRING;
+        caracter_prohibido = '"';
+        lexer_advance(lexer);lexer_advance(lexer);
+    } else if (
+        lexer->src[lexer->i]   == '\'' && 
+        lexer->src[lexer->i+1] == '\'' && 
+        lexer->src[lexer->i+2] == '\''   
+    ) { 
+        type_token = TOKEN_DOC_STRING;
+        caracter_prohibido = '\'';
+        lexer_advance(lexer);lexer_advance(lexer);
+    } 
+    else*/ if (
+        lexer->data[lexer->index]   == '"'
+    ) {
+        type_token = get(lexer->hash_table, build_token_special(TOKEN_STRING_DOUBLE));
+        caracter_prohibido = '"';
+    } else if (lexer->data[lexer->index]   == '\'') {
+        type_token = get(lexer->hash_table, build_token_special(TOKEN_STRING_SIMPLE));
+        caracter_prohibido = '\'';
+    } else {
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "#{FG:red}Error: #{FG:white}No se ha podido obtener el token\n");
+        return NULL;
+    }
+    lexer_advance(lexer);
+
+    while (1){
+        // si se encontro una \ y no se encontr el caracter prohibido o uno de escape
+        // se finaliza el bucle 
+        //printf(" last(%c) %hu = %c -> caracter_prohibido  %hu = %c \n", lexer->src[lexer->i-1], lexer->c, lexer->c, caracter_prohibido, caracter_prohibido );
+        if (lexer->chartter == caracter_prohibido && lexer->data[lexer->index-1] != '\\') break;
+        /*else if (lexer->c == 0x0){
+            puts("ERROR  lexer");
+            exit(1);
+        }*/
+        value = (unsigned char*)realloc(value, (strlen(value) + 2) * sizeof(unsigned char));
+        strcat(value, (char[]){lexer->chartter, 0});
+        lexer_advance(lexer);
+    }
+    
+    lexer_advance(lexer);
+    Token_build_t*self = init_token_build(value);
+    self->token = type_token;
+    if (self->token == NULL) {
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "#{FG:red}Error: #{FG:white}No se ha podido obtener el token EOF\n");
+        return NULL;
+    }
+    return self;
 }
 
 Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analysis) {
@@ -213,10 +288,6 @@ Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analys
             TYPE_DATA_DBG(func_token_analysis, "token_analysis = %p")
         END_TYPE_FUNC_DBG,
         lexer, token_analysis);
-
-    Token_t * token_number  = get(lexer->hash_table, build_token_special(TOKEN_NUMBER));
-    Token_t * token_eof     = get(lexer->hash_table, build_token_special(TOKEN_EOF));
-    Token_t * token_id      = get(lexer->hash_table, build_token_special(TOKEN_ID));
     //print_token(token_number);
     //print_token(token_eof);
     //print_token(token_id);
@@ -228,9 +299,9 @@ Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analys
         if (isdigit(lexer->chartter) && token_number != NULL) return lexer_parser_number(lexer);
 
         // si se indico los tokens de tipo identificador generico:
-        if (isalnum(lexer->chartter) != 0 && token_id != NULL) return lexer_advance_with(lexer, lexer_parser_id(lexer));
+        else if (isalnum(lexer->chartter) != 0 && token_id != NULL) return lexer_advance_with(lexer, lexer_parser_id(lexer));
 
-        return token_analysis(lexer);
+        else return token_analysis(lexer);
     }
     self = init_token_build(NULL);
     self->token = get(lexer->hash_table, build_token_special(TOKEN_EOF));

@@ -1,0 +1,402 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+ no time accumulated
+
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+  0.00      0.00     0.00       56     0.00     0.00  size_v
+  0.00      0.00     0.00       46     0.00     0.00  get_element_v
+  0.00      0.00     0.00       45     0.00     0.00  printf_color
+  0.00      0.00     0.00       45     0.00     0.00  resetColorTerminal
+  0.00      0.00     0.00       45     0.00     0.00  vprintf_color
+  0.00      0.00     0.00       41     0.00     0.00  hash
+  0.00      0.00     0.00       32     0.00     0.00  get
+  0.00      0.00     0.00       30     0.00     0.00  createLinkedList
+  0.00      0.00     0.00       30     0.00     0.00  insertNode
+  0.00      0.00     0.00       29     0.00     0.00  push_back_v
+  0.00      0.00     0.00       28     0.00     0.00  createNode
+  0.00      0.00     0.00       24     0.00     0.00  print_token
+  0.00      0.00     0.00       20     0.00     0.00  lexer_advance
+  0.00      0.00     0.00       16     0.00     0.00  init_token_build
+  0.00      0.00     0.00       16     0.00     0.00  lexer_next_token
+  0.00      0.00     0.00       14     0.00     0.00  cloneAST
+  0.00      0.00     0.00       14     0.00     0.00  token_analysis
+  0.00      0.00     0.00        9     0.00     0.00  push_token
+  0.00      0.00     0.00        9     0.00     0.00  put
+  0.00      0.00     0.00        8     0.00     0.00  lexer_parser_number
+  0.00      0.00     0.00        6     0.00     0.00  get_token
+  0.00      0.00     0.00        5     0.00     0.00  add_expression_to_ast
+  0.00      0.00     0.00        5     0.00     0.00  create_expression
+  0.00      0.00     0.00        5     0.00     0.00  create_token_with_autoincrement
+  0.00      0.00     0.00        5     0.00     0.00  inc_token
+  0.00      0.00     0.00        4     0.00     0.00  create_token_with_number
+  0.00      0.00     0.00        4     0.00     0.00  mergeASTs
+  0.00      0.00     0.00        4     0.00     0.00  replace_element_v
+  0.00      0.00     0.00        4     0.00     0.00  set_element_v
+  0.00      0.00     0.00        2     0.00     0.00  restore_lexer
+  0.00      0.00     0.00        1     0.00     0.00  build_lexer
+  0.00      0.00     0.00        1     0.00     0.00  calc_ast_vals
+  0.00      0.00     0.00        1     0.00     0.00  createHashTable
+  0.00      0.00     0.00        1     0.00     0.00  init_ast
+  0.00      0.00     0.00        1     0.00     0.00  init_lexer
+  0.00      0.00     0.00        1     0.00     0.00  printAST
+  0.00      0.00     0.00        1     0.00     0.00  print_Token_build
+  0.00      0.00     0.00        1     0.00     0.00  print_ast
+  0.00      0.00     0.00        1     0.00     0.00  print_tokens
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2024 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) no time propagated
+
+index % time    self  children    called     name
+                0.00    0.00       1/56          build_lexer [31]
+                0.00    0.00       4/56          set_element_v [29]
+                0.00    0.00       4/56          replace_element_v [28]
+                0.00    0.00       5/56          add_expression_to_ast [22]
+                0.00    0.00       6/56          printAST [36]
+                0.00    0.00      14/56          cloneAST [16]
+                0.00    0.00      22/56          mergeASTs [27]
+[1]      0.0    0.00    0.00      56         size_v [1]
+-----------------------------------------------
+                0.00    0.00       4/46          replace_element_v [28]
+                0.00    0.00       4/46          add_expression_to_ast [22]
+                0.00    0.00       5/46          printAST [36]
+                0.00    0.00       9/46          build_lexer [31]
+                0.00    0.00      24/46          mergeASTs [27]
+[2]      0.0    0.00    0.00      46         get_element_v [2]
+-----------------------------------------------
+                0.00    0.00       8/45          print_Token_build [37]
+                0.00    0.00      13/45          calc_ast_vals [32]
+                0.00    0.00      24/45          print_token [12]
+[3]      0.0    0.00    0.00      45         printf_color [3]
+                0.00    0.00      45/45          vprintf_color [5]
+-----------------------------------------------
+                0.00    0.00      45/45          vprintf_color [5]
+[4]      0.0    0.00    0.00      45         resetColorTerminal [4]
+-----------------------------------------------
+                0.00    0.00      45/45          printf_color [3]
+[5]      0.0    0.00    0.00      45         vprintf_color [5]
+                0.00    0.00      45/45          resetColorTerminal [4]
+-----------------------------------------------
+                0.00    0.00       9/41          put [19]
+                0.00    0.00      32/41          get [7]
+[6]      0.0    0.00    0.00      41         hash [6]
+-----------------------------------------------
+                0.00    0.00       1/32          print_Token_build [37]
+                0.00    0.00       2/32          lexer_next_token [15]
+                0.00    0.00       2/32          calc_ast_vals [32]
+                0.00    0.00       3/32          build_lexer [31]
+                0.00    0.00       6/32          get_token [21]
+                0.00    0.00       8/32          lexer_parser_number [20]
+                0.00    0.00      10/32          create_expression [23]
+[7]      0.0    0.00    0.00      32         get [7]
+                0.00    0.00      32/41          hash [6]
+-----------------------------------------------
+                0.00    0.00       1/30          init_lexer [35]
+                0.00    0.00       1/30          init_ast [34]
+                0.00    0.00      28/30          createNode [11]
+[8]      0.0    0.00    0.00      30         createLinkedList [8]
+                0.00    0.00      30/30          insertNode [9]
+-----------------------------------------------
+                0.00    0.00      30/30          createLinkedList [8]
+[9]      0.0    0.00    0.00      30         insertNode [9]
+-----------------------------------------------
+                0.00    0.00       1/29          add_expression_to_ast [22]
+                0.00    0.00       5/29          create_expression [23]
+                0.00    0.00       9/29          push_token [18]
+                0.00    0.00      14/29          mergeASTs [27]
+[10]     0.0    0.00    0.00      29         push_back_v [10]
+-----------------------------------------------
+                0.00    0.00       4/28          mergeASTs [27]
+                0.00    0.00      10/28          create_expression [23]
+                0.00    0.00      14/28          cloneAST [16]
+[11]     0.0    0.00    0.00      28         createNode [11]
+                0.00    0.00      28/30          createLinkedList [8]
+-----------------------------------------------
+                0.00    0.00       7/24          calc_ast_vals [32]
+                0.00    0.00       8/24          print_Token_build [37]
+                0.00    0.00       9/24          print_tokens [39]
+[12]     0.0    0.00    0.00      24         print_token [12]
+                0.00    0.00      24/45          printf_color [3]
+-----------------------------------------------
+                0.00    0.00       6/20          token_analysis [17]
+                0.00    0.00      14/20          lexer_parser_number [20]
+[13]     0.0    0.00    0.00      20         lexer_advance [13]
+-----------------------------------------------
+                0.00    0.00       2/16          lexer_next_token [15]
+                0.00    0.00       6/16          token_analysis [17]
+                0.00    0.00       8/16          lexer_parser_number [20]
+[14]     0.0    0.00    0.00      16         init_token_build [14]
+-----------------------------------------------
+                0.00    0.00       8/16          print_Token_build [37]
+                0.00    0.00       8/16          calc_ast_vals [32]
+[15]     0.0    0.00    0.00      16         lexer_next_token [15]
+                0.00    0.00      14/14          token_analysis [17]
+                0.00    0.00       2/16          init_token_build [14]
+                0.00    0.00       2/32          get [7]
+-----------------------------------------------
+                0.00    0.00      14/14          mergeASTs [27]
+[16]     0.0    0.00    0.00      14         cloneAST [16]
+                0.00    0.00      14/28          createNode [11]
+                0.00    0.00      14/56          size_v [1]
+-----------------------------------------------
+                0.00    0.00      14/14          lexer_next_token [15]
+[17]     0.0    0.00    0.00      14         token_analysis [17]
+                0.00    0.00       8/8           lexer_parser_number [20]
+                0.00    0.00       6/16          init_token_build [14]
+                0.00    0.00       6/6           get_token [21]
+                0.00    0.00       6/20          lexer_advance [13]
+-----------------------------------------------
+                0.00    0.00       9/9           main [93]
+[18]     0.0    0.00    0.00       9         push_token [18]
+                0.00    0.00       9/29          push_back_v [10]
+-----------------------------------------------
+                0.00    0.00       9/9           build_lexer [31]
+[19]     0.0    0.00    0.00       9         put [19]
+                0.00    0.00       9/41          hash [6]
+-----------------------------------------------
+                0.00    0.00       8/8           token_analysis [17]
+[20]     0.0    0.00    0.00       8         lexer_parser_number [20]
+                0.00    0.00      14/20          lexer_advance [13]
+                0.00    0.00       8/16          init_token_build [14]
+                0.00    0.00       8/32          get [7]
+-----------------------------------------------
+                0.00    0.00       6/6           token_analysis [17]
+[21]     0.0    0.00    0.00       6         get_token [21]
+                0.00    0.00       6/32          get [7]
+-----------------------------------------------
+                0.00    0.00       5/5           main [93]
+[22]     0.0    0.00    0.00       5         add_expression_to_ast [22]
+                0.00    0.00       5/56          size_v [1]
+                0.00    0.00       4/46          get_element_v [2]
+                0.00    0.00       4/4           mergeASTs [27]
+                0.00    0.00       4/4           replace_element_v [28]
+                0.00    0.00       1/29          push_back_v [10]
+-----------------------------------------------
+                0.00    0.00       5/5           main [93]
+[23]     0.0    0.00    0.00       5         create_expression [23]
+                0.00    0.00      10/32          get [7]
+                0.00    0.00      10/28          createNode [11]
+                0.00    0.00       5/29          push_back_v [10]
+-----------------------------------------------
+                0.00    0.00       5/5           main [93]
+[24]     0.0    0.00    0.00       5         create_token_with_autoincrement [24]
+                0.00    0.00       5/5           inc_token [25]
+-----------------------------------------------
+                0.00    0.00       5/5           create_token_with_autoincrement [24]
+[25]     0.0    0.00    0.00       5         inc_token [25]
+-----------------------------------------------
+                0.00    0.00       4/4           main [93]
+[26]     0.0    0.00    0.00       4         create_token_with_number [26]
+-----------------------------------------------
+                0.00    0.00       4/4           add_expression_to_ast [22]
+[27]     0.0    0.00    0.00       4         mergeASTs [27]
+                0.00    0.00      24/46          get_element_v [2]
+                0.00    0.00      22/56          size_v [1]
+                0.00    0.00      14/14          cloneAST [16]
+                0.00    0.00      14/29          push_back_v [10]
+                0.00    0.00       4/28          createNode [11]
+-----------------------------------------------
+                0.00    0.00       4/4           add_expression_to_ast [22]
+[28]     0.0    0.00    0.00       4         replace_element_v [28]
+                0.00    0.00       4/56          size_v [1]
+                0.00    0.00       4/46          get_element_v [2]
+                0.00    0.00       4/4           set_element_v [29]
+-----------------------------------------------
+                0.00    0.00       4/4           replace_element_v [28]
+[29]     0.0    0.00    0.00       4         set_element_v [29]
+                0.00    0.00       4/56          size_v [1]
+-----------------------------------------------
+                0.00    0.00       1/2           print_Token_build [37]
+                0.00    0.00       1/2           calc_ast_vals [32]
+[30]     0.0    0.00    0.00       2         restore_lexer [30]
+-----------------------------------------------
+                0.00    0.00       1/1           main [93]
+[31]     0.0    0.00    0.00       1         build_lexer [31]
+                0.00    0.00       9/46          get_element_v [2]
+                0.00    0.00       9/9           put [19]
+                0.00    0.00       3/32          get [7]
+                0.00    0.00       1/56          size_v [1]
+                0.00    0.00       1/1           createHashTable [33]
+-----------------------------------------------
+                0.00    0.00       1/1           main [93]
+[32]     0.0    0.00    0.00       1         calc_ast_vals [32]
+                0.00    0.00      13/45          printf_color [3]
+                0.00    0.00       8/16          lexer_next_token [15]
+                0.00    0.00       7/24          print_token [12]
+                0.00    0.00       2/32          get [7]
+                0.00    0.00       1/2           restore_lexer [30]
+-----------------------------------------------
+                0.00    0.00       1/1           build_lexer [31]
+[33]     0.0    0.00    0.00       1         createHashTable [33]
+-----------------------------------------------
+                0.00    0.00       1/1           main [93]
+[34]     0.0    0.00    0.00       1         init_ast [34]
+                0.00    0.00       1/30          createLinkedList [8]
+-----------------------------------------------
+                0.00    0.00       1/1           main [93]
+[35]     0.0    0.00    0.00       1         init_lexer [35]
+                0.00    0.00       1/30          createLinkedList [8]
+-----------------------------------------------
+                                   5             printAST [36]
+                0.00    0.00       1/1           print_ast [38]
+[36]     0.0    0.00    0.00       1+5       printAST [36]
+                0.00    0.00       6/56          size_v [1]
+                0.00    0.00       5/46          get_element_v [2]
+                                   5             printAST [36]
+-----------------------------------------------
+                0.00    0.00       1/1           main [93]
+[37]     0.0    0.00    0.00       1         print_Token_build [37]
+                0.00    0.00       8/24          print_token [12]
+                0.00    0.00       8/45          printf_color [3]
+                0.00    0.00       8/16          lexer_next_token [15]
+                0.00    0.00       1/32          get [7]
+                0.00    0.00       1/2           restore_lexer [30]
+-----------------------------------------------
+                0.00    0.00       1/1           main [93]
+[38]     0.0    0.00    0.00       1         print_ast [38]
+                0.00    0.00       1/1           printAST [36]
+-----------------------------------------------
+                0.00    0.00       1/1           main [93]
+[39]     0.0    0.00    0.00       1         print_tokens [39]
+                0.00    0.00       9/24          print_token [12]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2024 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [22] add_expression_to_ast   [6] hash                   [12] print_token
+  [31] build_lexer            [25] inc_token              [39] print_tokens
+  [32] calc_ast_vals          [34] init_ast                [3] printf_color
+  [16] cloneAST               [35] init_lexer             [10] push_back_v
+  [33] createHashTable        [14] init_token_build       [18] push_token
+   [8] createLinkedList        [9] insertNode             [19] put
+  [11] createNode             [13] lexer_advance          [28] replace_element_v
+  [23] create_expression      [15] lexer_next_token        [4] resetColorTerminal
+  [24] create_token_with_autoincrement [20] lexer_parser_number [30] restore_lexer
+  [26] create_token_with_number [27] mergeASTs            [29] set_element_v
+   [7] get                    [36] printAST                [1] size_v
+   [2] get_element_v          [37] print_Token_build      [17] token_analysis
+  [21] get_token              [38] print_ast               [5] vprintf_color
