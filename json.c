@@ -13,6 +13,10 @@ const Token_id inc_token(void) {
 }
 
 Token_build_t* token_analysis (Lexer_t *lexer) {
+    /*
+        Los elementos de tipo `Token_build_t*` devueltos por esta funcion deben ser liberados
+        con free por parte del programador.
+     */
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
         INIT_TYPE_FUNC_DBG(Token_build_t*  , token_analysis)
             TYPE_DATA_DBG(Lexer_t*, "lexer = %p")
@@ -49,6 +53,12 @@ Token_build_t* token_analysis (Lexer_t *lexer) {
 }
 
 int main() {
+    #ifdef _WIN32
+        #include <windows.h>
+        SetConsoleOutputCP(CP_UTF8);
+        SetConsoleCP(CP_UTF8);
+    #endif
+
     const char datos[] =
     "{"
     "   \"name\": \"Juan\","
@@ -70,9 +80,6 @@ int main() {
         push_token(&lexer, create_token(create_name_token(token_string_simple), build_token_special(TOKEN_STRING_SIMPLE),   inc_token)),
         push_token(&lexer, create_token(create_name_token(token_string_double), build_token_special(TOKEN_STRING_DOUBLE),   inc_token))
     };
-
-    // añadir tokens al lexer
-    
 
     //print_tokens(&lexer);
 
@@ -101,14 +108,18 @@ int main() {
     print_ast(ast);
 
 
-int sequence[] = {4, 3, 8};
-size_t seq_size = sizeof(sequence) / sizeof(sequence[0]);
+    int sequence[] = {4, 3, 8};
+    size_t seq_size = sizeof(sequence) / sizeof(sequence[0]);
 
-if (is_sequence_in_ast(ast, sequence, seq_size)) {
-    printf("La secuencia está presente en el AST.\n");
-} else {
-    printf("La secuencia no está presente en el AST.\n");
-}
+    if (is_sequence_in_ast(ast, sequence, seq_size)) {
+        printf("La secuencia está presente en el AST.\n");
+    } else {
+        printf("La secuencia no está presente en el AST.\n");
+    }
+
+    // Liberar la memoria del AST y el Lexer
+    freeAst(ast);
+    free_lexer(&lexer);
 
 
     puts("exit");

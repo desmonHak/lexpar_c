@@ -13,6 +13,10 @@ const Token_id inc_token(void) {
 }
 
 Token_build_t* token_analysis (Lexer_t *lexer) {
+    /*
+        Los elementos de tipo `Token_build_t*` devueltos por esta funcion deben ser liberados
+        con free por parte del programador.
+     */
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
         INIT_TYPE_FUNC_DBG(Token_build_t*  , token_analysis)
             TYPE_DATA_DBG(Lexer_t*, "lexer = %p")
@@ -100,8 +104,9 @@ int calc_ast_vals(Ast_t *ast, Lexer_t *lexer) {
         } else {
             operador = tok->token->type;
         }
+        free(tok); // liberar el Token_build_t
     }
-    
+    free(tok); // liberar el Token_build_t
 
     return val;
 }
@@ -130,10 +135,7 @@ int main() {
         push_token(&lexer, create_token(create_name_token(token_string_simple), build_token_special(TOKEN_STRING_SIMPLE),   inc_token)),
         push_token(&lexer, create_token(create_name_token(token_string_double), build_token_special(TOKEN_STRING_DOUBLE),   inc_token))
     };
-
-    // añadir tokens al lexer
     
-
     //print_tokens(&lexer);
 
     // construir el lexer con los tokens
@@ -161,6 +163,9 @@ int main() {
 
     
     printf("valor de la operacion: %d\n", calc_ast_vals(ast, &lexer));
+
+    freeAst(ast);
+    free_lexer(&lexer);
 
     puts("exit");
     puts(datos);

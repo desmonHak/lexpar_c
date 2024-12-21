@@ -219,10 +219,12 @@ void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
     while((tok = lexer_next_token(lexer, token_analysis))->token->type != token_eof){
         print_token(tok->token);
         printf_color("\tVal token: %s\n", tok->value_process);
+        free(tok); // liberar el Token_build_t
     }
 
     print_token(tok->token);
     printf_color("\tVal token: %p\n", tok->value_process);
+    free(tok); // liberar el Token_build_t
 
     // restaurar el lexer, es necesario para poder seguir operando con el
     restore_lexer(lexer);
@@ -289,6 +291,10 @@ Token_build_t* lexer_parser_string(Lexer_t* lexer){
 }
 
 Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analysis) {
+    /*
+        Los elementos de tipo `Token_build_t*` devueltos por esta funcion deben ser liberados
+        con free por parte del programador.
+     */
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
         INIT_TYPE_FUNC_DBG(Token_build_t*  , lexer_next_token)
             TYPE_DATA_DBG(Lexer_t*, "lexer = %p")
@@ -317,6 +323,20 @@ Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analys
         return NULL;
     }
     return self;
+}
+
+/* Liberar el lexer */
+void free_lexer(Lexer_t *lexer) {
+    if (lexer->list_id_tokens != NULL) {
+
+        // liberar la lista de tokens
+        freeLinkedList(lexer->list_id_tokens);
+    }
+    if (lexer->hash_table != NULL) {
+        // no es necesario liberar cada valor de las entradas de la tabla hash,
+        // ya que cada entrada se asociaba con el valor ya liberado de las listas enlazadas
+        freeHashTable(lexer->hash_table);
+    }
 }
 
 #endif

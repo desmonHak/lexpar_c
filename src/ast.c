@@ -177,17 +177,32 @@ void printAST(ASTNode* node, int depth, char* prefix, int isLast) {
     }
 }
 
-void freeAST(ASTNode* root) {
+void freeASTNode(ASTNode* root) {
     if (!root) return;
     
     size_t numRamas = size_v(root->ramas);
     for (size_t i = 0; i < numRamas; i++) {
-        freeAST(get_element_v(root->ramas, i));
+        freeASTNode(get_element_v(root->ramas, i));
     }
     
     freeLinkedList(root->ramas);
     free(root);
 }
+void freeAst(Ast_t* ast) {
+    if (!ast) return;
+
+    if (ast->root) {
+        size_t numTrees = size_v(ast->root);
+        for (size_t i = 0; i < numTrees; i++) {
+            ASTNode* tree = get_element_v(ast->root, i);
+            freeASTNode(tree);  // Liberar cada árbol en la lista raíz
+        }
+        freeLinkedList(ast->root);  // Liberar la lista raíz
+    }
+
+    free(ast);  // Liberar la estructura Ast_t
+}
+
 
 Ast_t* init_ast(Lexer_t* lexer) {
     Ast_t* ast = (Ast_t*)malloc(sizeof(Ast_t));
