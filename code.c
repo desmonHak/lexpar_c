@@ -108,6 +108,12 @@ int calc_ast_vals(Ast_t *ast, Lexer_t *lexer) {
 
 
 int main() {
+    #ifdef _WIN32
+        #include <windows.h>
+        SetConsoleOutputCP(CP_UTF8);
+        SetConsoleCP(CP_UTF8);
+    #endif
+
     const char datos[] = "11+23-4*10";
     Lexer_t lexer = init_lexer(datos, sizeof(datos));
 
