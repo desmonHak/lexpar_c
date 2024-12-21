@@ -159,8 +159,6 @@ void print_repeated_values(Ast_t* ast) {
     LinkedList* seen_values = createLinkedList();
     printf("Repeated values in the AST:\n");
     print_repeated_values_in_ast(ast->root, seen_values);
-
-    freeLinkedList(seen_values);
 }
 
 

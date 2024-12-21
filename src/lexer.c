@@ -205,7 +205,14 @@ void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
             TYPE_DATA_DBG(func_token_analysis, "token_analysis = %p")
         END_TYPE_FUNC_DBG,
         lexer, token_analysis);
-    Lexer_t* lexer_cpy = lexer; 
+    if (lexer == NULL) {
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Lexer no inicializado\n");
+        return;
+    }
+    if (token_analysis == NULL) {
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token analysis no inicializado\n");
+        return;
+    }
     Token_build_t* tok;
     
     Token_id token_eof    = ((Token_t*)get(lexer->hash_table, build_token_special(TOKEN_EOF)))->type;
@@ -215,10 +222,10 @@ void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
     }
 
     print_token(tok->token);
-    printf_color("\tVal token: %s\n", tok->value_process);
+    printf_color("\tVal token: %p\n", tok->value_process);
 
     // restaurar el lexer, es necesario para poder seguir operando con el
-    restore_lexer(&lexer);
+    restore_lexer(lexer);
 }
 
 
