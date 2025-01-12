@@ -71,7 +71,7 @@ Token_build_t* lexer_parser_id(Lexer_t* lexer){
     Token_build_t* self = init_token_build(value);
     self->token = get(lexer->hash_table, build_token_special(TOKEN_ID));
     if (self->token == NULL) {
-        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado\n");
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado (self->token)\n");
         return NULL;
     }
     return self;
@@ -119,7 +119,7 @@ Token_build_t* lexer_parser_number(Lexer_t* lexer){
     Token_build_t* self = init_token_build(value);
     self->token = get(lexer->hash_table, build_token_special(TOKEN_NUMBER));
     if (self->token == NULL) {
-        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado\n");
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado (self->token == NULL)\n");
         return NULL;
     }
     return self;
@@ -191,7 +191,7 @@ Token_t *get_token(Lexer_t *lexer, const char *value) {
         lexer, value);
     Token_t * token = get(lexer->hash_table, value);
     if (token == NULL) {
-        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado\n");
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado (self->token == NULL)\n");
         return NULL;
     }
     return token;
@@ -216,16 +216,30 @@ void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
     Token_build_t* tok;
     
     Token_id token_eof    = ((Token_t*)get(lexer->hash_table, build_token_special(TOKEN_EOF)))->type;
-    while((tok = lexer_next_token(lexer, token_analysis))->token->type != token_eof){
-        print_token(tok->token);
-        printf_color("\tVal token: %s\n", tok->value_process);
-        free(tok); // liberar el Token_build_t
+    while ( 1 ) {
+        tok = lexer_next_token(lexer, token_analysis);
+        if ( tok == NULL ) {
+            DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Tok devolvio NULL (tok == NULL)\n");
+        } else {
+            if ( tok->token == NULL ) {
+                DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado (tok->token == NULL)\n");
+                goto exit_free_tok;
+            } else { // imprimir el token
+                if ( token_eof == tok->token->type ) break;
+                print_token(tok->token);
+                printf_color("\tVal token: %s\n", (const char *)tok->value_process);
+                free(tok);
+            }
+        }
     }
 
     print_token(tok->token);
     printf_color("\tVal token: %p\n", tok->value_process);
-    free(tok); // liberar el Token_build_t
 
+    exit_free_tok:
+    if (tok != NULL) free(tok); // liberar el Token_build_t
+
+    restore_lexer:
     // restaurar el lexer, es necesario para poder seguir operando con el
     restore_lexer(lexer);
 }
