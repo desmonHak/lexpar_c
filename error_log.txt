@@ -6,3 +6,77 @@
  (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
 [Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}include/../src/parser.c#{FG:reset}:#{FG:red}078#{FG:green}]#{FG:reset} Error: token_val == NULL
  (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}232#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un ''
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}232#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un (12)''
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}232#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un (token:3) se encontro un (token:12)''
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}222#{FG:green}]#{FG:reset} existingTree->value 12
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}233#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un (token:3) se encontro un (token:12)''
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}116#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un token de tipo 12, pero se encontró 3
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}116#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un token de tipo 12, pero se encontró 7
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}149#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un token de tipo 12, pero se encontró 3
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}146#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un (token:3) se encontro un (token:3)''
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}183#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '2' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}183#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '12' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}183#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '12' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '3' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '3' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '3' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '3' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '3' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}146#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un (token:3) se encontro un (token:0)' (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}146#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un (token:3) se encontro un (token:0)' (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}264#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un '{' o un '}'
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}264#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un '{' o un '}' 0
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}264#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un '{' o un '}' 0
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}250#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un '{'
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '3' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}250#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un '{'
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}250#{FG:green}]#{FG:reset} Error de sintaxis: Se esperaba un '{', pero se encontre un token(12)
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token '3' en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}183#{FG:green}]#{FG:reset} Coincidencia encontrada en un subnivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}185#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token token(7) en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}268#{FG:green}]#{FG:reset} Error: Subnivel no procesado correctamente
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}268#{FG:green}]#{FG:reset} Error: Subnivel no procesado correctamente
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token token(3) en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token token(3) en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token token(3) en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}189#{FG:green}]#{FG:reset} Error de sintaxis: No se encontró coincidencia para el token token(3) en este nivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}183#{FG:green}]#{FG:reset} Coincidencia encontrada en un subnivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}195#{FG:green}]#{FG:reset} Coincidencia encontrada en un subnivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
+[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}json.c#{FG:reset}:#{FG:red}195#{FG:green}]#{FG:reset} Coincidencia encontrada en un subnivel
+ (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)

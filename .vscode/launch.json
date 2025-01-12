@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/desmon0xff/Desktop/files/Shared/lexpar_c",
-      "program": "c:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/build/Debug/outDebug",
+      "program": "c:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/json.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

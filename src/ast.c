@@ -158,7 +158,7 @@ void print_repeated_values(Ast_t* ast) {
     }
     LinkedList* seen_values = createLinkedList();
     printf("Repeated values in the AST:\n");
-    print_repeated_values_in_ast(ast->root, seen_values);
+    print_repeated_values_in_ast(get_element_v(ast->root, 0), seen_values);
 }
 
 
@@ -245,10 +245,6 @@ ASTNode* create_expression(Ast_t* ast, const char* token_init, ...) {
 }
 
 
-void restore_lexer(Lexer_t* lexer) {
-    lexer->index = 0;
-    lexer->chartter = lexer->data[lexer->index];
-}
 
 void add_expression_to_ast(Ast_t* ast, ASTNode* expression) {
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
@@ -281,7 +277,7 @@ void add_expression_to_ast(Ast_t* ast, ASTNode* expression) {
     // Si no hay coincidencia en las raíces, agregar como un nuevo árbol independiente
     push_back_v(ast->root, expression);
 }
-int check_sequence_in_ast(ASTNode* node, int* sequence, size_t seq_size, size_t index) {
+int check_sequence_in_ast_array(ASTNode* node, int* sequence, size_t seq_size, size_t index) {
     if (node == NULL || index >= seq_size) return 0;
 
     // Compara el valor del nodo con el valor de la secuencia en la posición actual
@@ -307,7 +303,7 @@ int check_sequence_in_ast(ASTNode* node, int* sequence, size_t seq_size, size_t 
 }
 
 // Función pública que puedes llamar para verificar la secuencia
-int is_sequence_in_ast(Ast_t* ast, int* sequence, size_t seq_size) {
+int is_sequence_in_ast_array(Ast_t* ast, int* sequence, size_t seq_size) {
     if (ast->root == NULL) {
         return 0;  // El AST está vacío
     }
@@ -316,13 +312,57 @@ int is_sequence_in_ast(Ast_t* ast, int* sequence, size_t seq_size) {
     size_t numTrees = size_v(ast->root);
     for (size_t i = 0; i < numTrees; i++) {
         ASTNode* existingTree = get_element_v(ast->root, i);
-        if (check_sequence_in_ast(existingTree, sequence, seq_size, 0)) {
+        if (check_sequence_in_ast_array(existingTree, sequence, seq_size, 0)) {
             return 1;  // Secuencia encontrada
         }
     }
 
     return 0;  // No se encontró la secuencia en ningún árbol
 }
+
+int check_sequence_in_ast_vector(ASTNode* node, LinkedList* sequence, size_t seq_size, size_t index) {
+    if (node == NULL || index >= seq_size) return 0;
+
+    // Compara el valor del nodo con el valor de la secuencia en la posición actual
+    if (node->value != *((const position*)get_element_v(sequence, index))) {
+        return 0;  // Si no coinciden, no se encuentra la secuencia
+    }
+
+    // Si hemos recorrido toda la secuencia, significa que la encontramos
+    if (index == seq_size - 1) {
+        return 1;
+    }
+
+    // Si aún no hemos recorrido toda la secuencia, debemos seguir buscando en las ramas
+    size_t numRamas = size_v(node->ramas);
+    for (size_t i = 0; i < numRamas; i++) {
+        ASTNode* child = get_element_v(node->ramas, i);
+        if (check_sequence_in_ast_vector(child, sequence, seq_size, index + 1)) {
+            return 1;  // Secuencia encontrada en alguna rama
+        }
+    }
+
+    return 0;  // No se encontró la secuencia en las ramas
+}
+
+// Función pública que puedes llamar para verificar la secuencia
+int is_sequence_in_ast_vector(Ast_t* ast, LinkedList* sequence, size_t seq_size) {
+    if (ast->root == NULL || sequence == NULL) {
+        return 0;  // El AST está vacío o la secuencia está vacía
+    }
+
+    // Iteramos sobre cada árbol en la raíz del AST
+    size_t numTrees = size_v(ast->root);
+    for (size_t i = 0; i < numTrees; i++) {
+        ASTNode* existingTree = get_element_v(ast->root, i);
+        if (check_sequence_in_ast_vector(existingTree, sequence, seq_size, 0)) {
+            return 1;  // Secuencia encontrada
+        }
+    }
+
+    return 0;  // No se encontró la secuencia en ningún árbol
+}
+
 
 
 void print_ast(Ast_t* ast) {

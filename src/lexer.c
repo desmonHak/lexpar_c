@@ -184,7 +184,7 @@ void build_lexer(Lexer_t *lexer) {
 
 Token_t *get_token(Lexer_t *lexer, const char *value) {
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
-        INIT_TYPE_FUNC_DBG(Token_t *, print_Token_build)
+        INIT_TYPE_FUNC_DBG(Token_t *, get_token)
             TYPE_DATA_DBG(Lexer_t*, "lexer = %p")
             TYPE_DATA_DBG(func_token_analysis, "value = %s")
         END_TYPE_FUNC_DBG,
@@ -337,6 +337,12 @@ void free_lexer(Lexer_t *lexer) {
         // ya que cada entrada se asociaba con el valor ya liberado de las listas enlazadas
         freeHashTable(lexer->hash_table);
     }
+}
+
+
+void restore_lexer(Lexer_t* lexer) {
+    lexer->index = 0;
+    lexer->chartter = lexer->data[lexer->index];
 }
 
 #endif

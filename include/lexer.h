@@ -32,6 +32,7 @@ static Token_t * token_eof    = NULL;
 static Token_t * token_id     = NULL;
 
 typedef Token_build_t* (*func_token_analysis)(Lexer_t* lexer);
+void restore_lexer(Lexer_t* lexer);
 
 #include "../src/lexer.c"
 #endif
