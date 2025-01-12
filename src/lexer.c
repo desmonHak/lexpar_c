@@ -92,7 +92,12 @@ Token_build_t* lexer_parser_number(Lexer_t* lexer){
      */
 
     unsigned char * value;// = (unsigned char*)calloc(1, sizeof(unsigned char));
-    debug_calloc(unsigned char, value, 1, sizeof(unsigned char));
+    
+    if (lexer->chartter == '-') {
+        debug_calloc(unsigned char, value, 2, sizeof(unsigned char));
+        value[0] = lexer->chartter;
+        lexer_advance(lexer);
+    } else debug_calloc(unsigned char, value, 1, sizeof(unsigned char));
 
     while (isdigit(lexer->chartter) || lexer->chartter == 'x' || lexer->chartter == 'b')
     {
