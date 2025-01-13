@@ -10,3 +10,4 @@
 *grpof*
 gmon.*
 error_log.txt
+*.a

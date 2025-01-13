@@ -1,0 +1,217 @@
+echo "generando librerias estatica... libcolors.a"
+"generando librerias estatica... libcolors.a"
+mingw32-make -C ./lib/structs_data_C/DebugLibC/colors-C-C-plus-plus -f windows.mk
+mingw32-make[1]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[1]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+echo "generando librerias estatica... libdebug.a"
+"generando librerias estatica... libdebug.a"
+mingw32-make -C ./lib/structs_data_C/DebugLibC -f windows.mk
+mingw32-make[1]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estaticas..."
+"generando librerias estaticas..."
+mingw32-make -C ./colors-C-C-plus-plus -f windows.mk
+mingw32-make[2]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[2]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libdebug.a
+debug_c.o
+error_c.o
+time_code.o
+gcc -std=c11 -I. -Icolors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. -Icolors-C-C-plus-plus example/hash.c -L. -ldebug -Lcolors-C-C-plus-plus -lcolors -o example.exe
+mingw32-make[1]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estatica... libstructs_data_c.a"
+"generando librerias estatica... libstructs_data_c.a"
+mingw32-make -C ./lib/structs_data_C -f windows.mk
+mingw32-make[1]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+echo "generando librerias estatica... libcolors.a"
+"generando librerias estatica... libcolors.a"
+mingw32-make -C ./DebugLibC/colors-C-C-plus-plus -f windows.mk
+mingw32-make[2]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[2]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+echo "generando librerias estatica... libdebug.a"
+"generando librerias estatica... libdebug.a"
+mingw32-make -C ./DebugLibC -f windows.mk
+mingw32-make[2]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estaticas..."
+"generando librerias estaticas..."
+mingw32-make -C ./colors-C-C-plus-plus -f windows.mk
+mingw32-make[3]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[3]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libdebug.a
+debug_c.o
+error_c.o
+time_code.o
+gcc -std=c11 -I. -Icolors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. -Icolors-C-C-plus-plus example/hash.c -L. -ldebug -Lcolors-C-C-plus-plus -lcolors -o example.exe
+mingw32-make[2]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+ar -t libstructs_data_c.a
+array-list.o
+hash-table.o
+matriz-list.o
+vector-list.o
+mingw32-make -C . -f windows.mk examples
+mingw32-make[2]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+echo "generando librerias estatica... libcolors.a"
+"generando librerias estatica... libcolors.a"
+mingw32-make -C ./DebugLibC/colors-C-C-plus-plus -f windows.mk
+mingw32-make[3]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[3]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+echo "generando librerias estatica... libdebug.a"
+"generando librerias estatica... libdebug.a"
+mingw32-make -C ./DebugLibC -f windows.mk
+mingw32-make[3]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estaticas..."
+"generando librerias estaticas..."
+mingw32-make -C ./colors-C-C-plus-plus -f windows.mk
+mingw32-make[4]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[4]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libdebug.a
+debug_c.o
+error_c.o
+time_code.o
+gcc -std=c11 -I. -Icolors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. -Icolors-C-C-plus-plus example/hash.c -L. -ldebug -Lcolors-C-C-plus-plus -lcolors -o example.exe
+mingw32-make[3]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+ar -t libstructs_data_c.a
+array-list.o
+hash-table.o
+matriz-list.o
+vector-list.o
+gcc examples/code_array-list.c    		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_array-list.exe
+gcc examples/code_hash-table.c    		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_hash-table.exe
+gcc examples/code_matriz-list.c   		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_matriz-list.exe
+gcc examples/code_vector-list.c   		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_vector-list.exe
+gcc examples/code-array-list_vector-list.c -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors	-o examples/code-array-list_vector-list.exe
+mingw32-make[2]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+mingw32-make[1]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+ar -t liblexpar_c.a
+ast.o
+lexer.o
+parser.o
+token.o
+mingw32-make -C . -f windows.mk examples
+mingw32-make[1]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c'
+echo "generando librerias estatica... libcolors.a"
+"generando librerias estatica... libcolors.a"
+mingw32-make -C ./lib/structs_data_C/DebugLibC/colors-C-C-plus-plus -f windows.mk
+mingw32-make[2]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[2]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+echo "generando librerias estatica... libdebug.a"
+"generando librerias estatica... libdebug.a"
+mingw32-make -C ./lib/structs_data_C/DebugLibC -f windows.mk
+mingw32-make[2]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estaticas..."
+"generando librerias estaticas..."
+mingw32-make -C ./colors-C-C-plus-plus -f windows.mk
+mingw32-make[3]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[3]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libdebug.a
+debug_c.o
+error_c.o
+time_code.o
+gcc -std=c11 -I. -Icolors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. -Icolors-C-C-plus-plus example/hash.c -L. -ldebug -Lcolors-C-C-plus-plus -lcolors -o example.exe
+mingw32-make[2]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estatica... libstructs_data_c.a"
+"generando librerias estatica... libstructs_data_c.a"
+mingw32-make -C ./lib/structs_data_C -f windows.mk
+mingw32-make[2]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+echo "generando librerias estatica... libcolors.a"
+"generando librerias estatica... libcolors.a"
+mingw32-make -C ./DebugLibC/colors-C-C-plus-plus -f windows.mk
+mingw32-make[3]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[3]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+echo "generando librerias estatica... libdebug.a"
+"generando librerias estatica... libdebug.a"
+mingw32-make -C ./DebugLibC -f windows.mk
+mingw32-make[3]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estaticas..."
+"generando librerias estaticas..."
+mingw32-make -C ./colors-C-C-plus-plus -f windows.mk
+mingw32-make[4]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[4]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libdebug.a
+debug_c.o
+error_c.o
+time_code.o
+gcc -std=c11 -I. -Icolors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. -Icolors-C-C-plus-plus example/hash.c -L. -ldebug -Lcolors-C-C-plus-plus -lcolors -o example.exe
+mingw32-make[3]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+ar -t libstructs_data_c.a
+array-list.o
+hash-table.o
+matriz-list.o
+vector-list.o
+mingw32-make -C . -f windows.mk examples
+mingw32-make[3]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+echo "generando librerias estatica... libcolors.a"
+"generando librerias estatica... libcolors.a"
+mingw32-make -C ./DebugLibC/colors-C-C-plus-plus -f windows.mk
+mingw32-make[4]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[4]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+echo "generando librerias estatica... libdebug.a"
+"generando librerias estatica... libdebug.a"
+mingw32-make -C ./DebugLibC -f windows.mk
+mingw32-make[4]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+echo "generando librerias estaticas..."
+"generando librerias estaticas..."
+mingw32-make -C ./colors-C-C-plus-plus -f windows.mk
+mingw32-make[5]: Entering directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libcolors.a
+colors.o
+gcc -std=c11 -I. -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. example/example.c -L. -lcolors -o example.exe
+mingw32-make[5]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus'
+ar -t libdebug.a
+debug_c.o
+error_c.o
+time_code.o
+gcc -std=c11 -I. -Icolors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -I. -Icolors-C-C-plus-plus example/hash.c -L. -ldebug -Lcolors-C-C-plus-plus -lcolors -o example.exe
+mingw32-make[4]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C/DebugLibC'
+ar -t libstructs_data_c.a
+array-list.o
+hash-table.o
+matriz-list.o
+vector-list.o
+gcc examples/code_array-list.c    		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_array-list.exe
+gcc examples/code_hash-table.c    		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_hash-table.exe
+gcc examples/code_matriz-list.c   		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_matriz-list.exe
+gcc examples/code_vector-list.c   		 -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors   -o examples/code_vector-list.exe
+gcc examples/code-array-list_vector-list.c -std=c11 -I. -IDebugLibC -IDebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -x c  -time  -save-temps -g -D DEBUG_ENABLE -L. -lstructs_data_c -LDebugLibC -ldebug -LDebugLibC/colors-C-C-plus-plus -lcolors	-o examples/code-array-list_vector-list.exe
+mingw32-make[3]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+mingw32-make[2]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c/lib/structs_data_C'
+ar -t liblexpar_c.a
+ast.o
+lexer.o
+parser.o
+token.o
+gcc examples/code.c -std=c11 -I. -Ilib/structs_data_C -Ilib/structs_data_C/DebugLibC -Ilib/structs_data_C/DebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -Llib/structs_data_C -lstructs_data_c -Llib/structs_data_C/DebugLibC  -ldebug -Llib/structs_data_C/DebugLibC/colors-C-C-plus-plus -lcolors -o code.exe
+gcc examples/json.c -std=c11 -I. -Ilib/structs_data_C -Ilib/structs_data_C/DebugLibC -Ilib/structs_data_C/DebugLibC/colors-C-C-plus-plus -masm=intel -D_ExceptionHandler -fdiagnostics-color=always -O3 -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-type-limits -Wno-unused-variable -Wno-pointer-sign -Llib/structs_data_C -lstructs_data_c -Llib/structs_data_C/DebugLibC  -ldebug -Llib/structs_data_C/DebugLibC/colors-C-C-plus-plus -lcolors -o json.exe
+mingw32-make[1]: Leaving directory 'C:/Users/desmon0xff/Desktop/files/Shared/lexpar_c'
