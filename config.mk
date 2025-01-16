@@ -13,12 +13,14 @@ PATH_DEBUG 		  	= $(PATH_STRUCTS_DATA_C)/DebugLibC
 PATH_COLORS		  	= $(PATH_DEBUG)/colors-C-C-plus-plus
 
 LINKER_FLAGS  	    = 									\
+	-L. 			 -llexpar_c							\
 	-L$(PATH_STRUCTS_DATA_C) -lstructs_data_c 			\
 	-L$(PATH_DEBUG)  -ldebug 							\
-	-L$(PATH_COLORS) -lcolors
+	-L$(PATH_COLORS) -lcolors							\
 
 INCLUDE_FLAGS = 										\
 	-I. 												\
+	-I$(PATH_INCLUDE)									\
 	-I$(PATH_STRUCTS_DATA_C) 							\
 	-I$(PATH_DEBUG) -I$(PATH_COLORS)
 
@@ -39,4 +41,4 @@ ARR_FLAGS     = -rc
 CFLAGS_EXAMPLES 		= $(CFLAGS) $(LINKER_FLAGS)
 CFLAGS_EXAMPLES_DEBUG 	= $(CFLAGS_DEBUG) $(LINKER_FLAGS)
 
-OBJECTS 	  = ast.o lexer.o parser.o token.o
+OBJECTS 	  = ast.o lexer.o token.o

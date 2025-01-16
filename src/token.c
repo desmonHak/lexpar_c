@@ -1,7 +1,7 @@
 #ifndef LEXPAR_TOKEN_C
 #define LEXPAR_TOKEN_C
 
-#include "../include/token.h"
+#include "global.h"
 
 Token_t* create_token_with_number(const char* name_token, Object value, Token_id type) {
     Token_t *token;

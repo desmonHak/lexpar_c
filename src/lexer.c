@@ -1,7 +1,7 @@
 #ifndef LEXPAR_LEXER_C
 #define LEXPAR_LEXER_C
 
-#include "../include/lexer.h"
+#include "global.h"
 
 Lexer_t init_lexer(const char* data, uint64_t size) {
     unsigned char c;
@@ -223,7 +223,7 @@ Token_t *get_token(Lexer_t *lexer, const char *value) {
     return token;
 }
 
-Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analysis);
+
 void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
         INIT_TYPE_FUNC_DBG(void  , print_Token_build)
@@ -270,6 +270,10 @@ void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
     restore_lexer(lexer);
 }
 
+void restore_lexer(Lexer_t* lexer) {
+    lexer->index = 0;
+    lexer->chartter = lexer->data[lexer->index];
+}
 
 Token_build_t* lexer_parser_string(Lexer_t* lexer){
     Token_t * type_token = NULL;

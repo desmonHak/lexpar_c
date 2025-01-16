@@ -1,8 +1,7 @@
 #ifndef AST_C
 #define AST_C
 
-
-#include "../include/ast.h"
+#include "global.h"
 
 ASTNode* createNode(position value) {
     ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
@@ -245,10 +244,6 @@ ASTNode* create_expression(Ast_t* ast, const char* token_init, ...) {
 }
 
 
-void restore_lexer(Lexer_t* lexer) {
-    lexer->index = 0;
-    lexer->chartter = lexer->data[lexer->index];
-}
 
 void add_expression_to_ast(Ast_t* ast, ASTNode* expression) {
     DEBUG_PRINT(DEBUG_LEVEL_INFO,

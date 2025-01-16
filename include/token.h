@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 
-#include "../lib/structs_data_C/DebugLibC/time_code.h"
+#include "time_code.h"
+
 #include "global.h"
 
 #ifndef Token_id
@@ -54,5 +55,12 @@ typedef const Token_id (*func_auto_increment)(void);
     default: create_token_with_number)(name, value, type)
 #endif
 
-#include "../src/token.c"
+Token_t* create_token_with_number(const char* name_token, Object value, Token_id type);
+Token_build_t* init_token_build(Object value_process);
+Token_t* create_token_with_autoincrement(
+    const char* name_token,
+    Object value,
+    func_auto_increment auto_increment
+);
+void print_token(Token_t *token);
 #endif

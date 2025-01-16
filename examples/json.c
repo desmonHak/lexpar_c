@@ -1,5 +1,4 @@
-#include "include/parser.h"
-
+#include "global.h"
 typedef enum names_tokens {
     token_llave_init,
     token_llave_end,

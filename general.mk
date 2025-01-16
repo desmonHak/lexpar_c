@@ -1,10 +1,10 @@
 include config.mk
 
-all: generate_lib
-	$(MAKE) -C . -f $(MAKE_NAME) examples
-
 generate_lib: libstructs_data_c.a $(TARGET).a
 	ar -t $(TARGET).a
+
+all: generate_lib
+	$(MAKE) -C . -f $(MAKE_NAME) examples
 
 examples: generate_lib
 	$(CC) examples/code.c $(CFLAGS_EXAMPLES) -o code.$(EXTENSION)
@@ -26,9 +26,6 @@ ast.o: $(PATH_SRC)/ast.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 lexer.o: $(PATH_SRC)/lexer.c
-	$(CC) $(CFLAGS) -c $^ -o $@
-
-parser.o: $(PATH_SRC)/parser.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 token.o: $(PATH_SRC)/token.c

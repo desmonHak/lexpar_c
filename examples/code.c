@@ -1,4 +1,4 @@
-#include "include/parser.h"
+#include "global.h"
 
 typedef enum names_tokens {
     token_div,
