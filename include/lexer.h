@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <ctype.h>
+#include <errno.h>
 
 #ifndef _ExceptionHandler_WIN_
     #define _ExceptionHandler_WIN_
