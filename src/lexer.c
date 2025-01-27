@@ -52,7 +52,7 @@ Token_build_t* lexer_parser_id(Lexer_t* lexer){
         lexer);
     unsigned char * value = (unsigned char*)calloc(1, sizeof(unsigned char));
 
-    while (isalnum(lexer->chartter) || lexer->chartter == '_')
+    while (isalnum(lexer->chartter) || lexer->chartter == '_' || lexer->chartter == '-')
     {
         value = (unsigned char*)realloc(value, (strlen(value) + 2) * sizeof(unsigned char));
         if (value == NULL) {
@@ -64,7 +64,7 @@ Token_build_t* lexer_parser_id(Lexer_t* lexer){
         strcat(value, (char[]){lexer->chartter, 0});
 
         // siempre que el siguiente caracter sea una letra o un dijito, ejecutara lexer_advance, sino interumpe el bucle
-        if (isalnum(lexer->data[lexer->index+1]) ||  lexer->data[lexer->index+1] == '_')
+        if (isalnum(lexer->data[lexer->index+1]) ||  lexer->data[lexer->index+1] == '_' || lexer->data[lexer->index+1] == '-')
             lexer_advance(lexer);
         else break;
     }
