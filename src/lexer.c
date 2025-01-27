@@ -225,13 +225,13 @@ Token_t *get_token(Lexer_t *lexer, const char *value) {
 
 // Función para imprimir la información de un Token_build_t
 void printTokenBuildInfo(const Token_build_t* token_build) {
-    if (!token_build) {
+    if (token_build == NULL) {
         printf_color("Token_build_t es #{FG:lred}(NULL)#{reset}.\n");
         return;
     }
 
     // Verificar si el token asociado es válido
-    if (!token_build->token) {
+    if (token_build->token == NULL) {
         printf_color("Token_build_t contiene un token #{FG:lred}(NULL)#{reset}.\n");
         return;
     }
