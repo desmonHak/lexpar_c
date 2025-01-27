@@ -223,7 +223,43 @@ Token_t *get_token(Lexer_t *lexer, const char *value) {
     return token;
 }
 
+// Función para imprimir la información de un Token_build_t
+void printTokenBuildInfo(const Token_build_t* token_build) {
+    if (!token_build) {
+        printf_color("Token_build_t es #{FG:lred}(NULL)#{reset}.\n");
+        return;
+    }
 
+    // Verificar si el token asociado es válido
+    if (!token_build->token) {
+        printf_color("Token_build_t contiene un token #{FG:lred}(NULL)#{reset}.\n");
+        return;
+    }
+
+    const Token_t* token = token_build->token;
+
+    // Imprimir informacion del token
+    printf_color("Informacion del Token_build_t:\n");
+    printf_color("--------------------------------\n");
+    printf_color("Nombre del Token: #{FG:lgreen}%s#{reset}\n", token->name_token ? token->name_token : "(#{FG:lred}NULL#{reset})");
+    printf_color("Tipo del Token (ID): %u\n", token->type);
+
+    // Imprimir el valor del token si está disponible
+    if (token->value) {
+        printf_color("Valor del Token: #{FG:lcyan}%s#{reset}\n", token->value);
+    } else {
+        printf_color("Valor del Token: (#{FG:lred}(NULL)#{reset})\n");
+    }
+
+    // Imprimir el valor procesado si está disponible
+    if (token_build->value_process) {
+        printf_color("Valor Procesado: #{FG:purple}%s#{reset}\n", token_build->value_process);
+    } else {
+        printf_color("Valor Procesado: (#{FG:lred}(NULL)#{reset})\n");
+    }
+
+    printf_color("--------------------------------\n");
+}
 void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis){
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
         INIT_TYPE_FUNC_DBG(void  , print_Token_build)
@@ -368,6 +404,20 @@ Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analys
         return NULL;
     }
     return self;
+}
+
+Lexer_t backup_lexer(Lexer_t* lexer) {
+    /*
+     * permite hacer una copia del lexer para poder restaurarlo en caso de necesitarlo
+     */
+    return (Lexer_t){
+        .chartter       = lexer->chartter,
+        .data           = lexer->data,
+        .index          = lexer->index,
+        .size           = lexer->size,
+        .hash_table     = lexer->hash_table,
+        .list_id_tokens = lexer->list_id_tokens,
+    };
 }
 
 /* Liberar el lexer */
