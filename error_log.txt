@@ -1,8 +1,0 @@
-[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}include/../src/parser.c#{FG:reset}:#{FG:red}078#{FG:green}]#{FG:reset} Error: token_val == NULL
- (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
-[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}include/../src/parser.c#{FG:reset}:#{FG:red}078#{FG:green}]#{FG:reset} Error: token_val == NULL
- (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
-[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}include/../src/parser.c#{FG:reset}:#{FG:red}078#{FG:green}]#{FG:reset} Error: token_val == NULL
- (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
-[Error] #{FG:lgreen}[#{FG:lpurple}ERROR#{FG:reset}:#{FG:cyan}include/../src/parser.c#{FG:reset}:#{FG:red}078#{FG:green}]#{FG:reset} Error: token_val == NULL
- (include/../lib/structs_data_C/DebugLibC/debug_c.c:433)
