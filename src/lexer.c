@@ -169,6 +169,15 @@ Token_build_t* lexer_advance_with(Lexer_t* lexer, Token_build_t* token){
 }
 
 void print_tokens(Lexer_t *lexer) {
+    if (lexer == NULL) {
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "#{FG:red}Error: #{FG:white}lexer no es valido (lexer == NULL)\n");
+        return;
+    }
+
+    if (lexer->list_id_tokens == NULL) {
+        DEBUG_PRINT(DEBUG_LEVEL_ERROR, "#{FG:red}Error: #{FG:white}La lista de tokens no fue inicializada (lexer->list_id_tokens == NULL)\n");
+        return;
+    }
     Node *current = lexer->list_id_tokens->head;
     while (current != NULL) {
         Token_t *token = (Token_t *)current->data;
