@@ -48,7 +48,7 @@ Token_t *get_token(Lexer_t *lexer, const char *value);
 Lexer_t init_lexer(const char* data, uint64_t size);
 Lexer_t backup_lexer(Lexer_t* lexer);
 
-long long strtoll_plus(const char *str, char *endptr, int base);
+long long strtoll_plus(const char *str, char **endptr, int base);
 const position push_token(Lexer_t *lexer, Token_t *token);
 void print_Token_build(Lexer_t* lexer, func_token_analysis token_analysis);
 void lexer_advance(Lexer_t* lexer);

@@ -78,16 +78,15 @@ Token_build_t* lexer_parser_id(Lexer_t* lexer){
 }
 
 
-long long strtoll_plus(const char *str, char *endptr, int base) {
+long long strtoll_plus(const char *str, char **endptr, int base) {
     errno = 0;
-    char *_endptr = endptr;
-    // Detecta si es binario (prefijo 0b o 0B)
+    
     if (strncmp(str, "0b", 2) == 0 || strncmp(str, "0B", 2) == 0) {
-        return strtoll(str + 2, &_endptr, 2);  // Base 2, omite "0b"
+        return strtoll(str + 2, endptr, 2);  // Base 2, omite "0b"
     }
 
     // Si no es binario, usa base automática (0 = detecta base por prefijo)
-    return strtoll(str, &_endptr, base);
+    return strtoll(str, endptr, base);
 }
 
 Token_build_t* lexer_parser_number(Lexer_t* lexer){
