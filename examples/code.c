@@ -159,7 +159,7 @@ int main() {
     }
 
     print_tokens(&lexer);
-    print_ast(ast);
+    print_Ast_t(ast);
 
     
     printf("valor de la operacion: %d\n", calc_ast_vals(ast, &lexer));

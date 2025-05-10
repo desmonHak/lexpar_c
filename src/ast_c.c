@@ -320,7 +320,7 @@ int is_sequence_in_ast(Ast_t* ast, int* sequence, size_t seq_size) {
 }
 
 
-void print_ast(Ast_t* ast) {
+void print_Ast_t(Ast_t* ast) {
     if (ast->root == NULL) {
         DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: AST is empty\n");
         return;

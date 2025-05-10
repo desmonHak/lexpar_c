@@ -60,7 +60,7 @@ void freeAst(Ast_t* ast);
 Ast_t* init_ast(Lexer_t* lexer);
 ASTNode* create_expression(Ast_t* ast, const char* token_init, ...);
 void add_expression_to_ast(Ast_t* ast, ASTNode* expression);
-void print_ast(Ast_t* ast);
+void print_Ast_t(Ast_t* ast);
 int is_sequence_in_ast(Ast_t* ast, int* sequence, size_t seq_size) ;
 
 #endif

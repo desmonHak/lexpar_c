@@ -43,5 +43,5 @@ ARR_FLAGS     = -rc
 CFLAGS_EXAMPLES 		= $(CFLAGS) $(LINKER_FLAGS)
 CFLAGS_EXAMPLES_DEBUG 	= $(CFLAGS_DEBUG) $(LINKER_FLAGS)
 
-OBJECTS 	  = ast.o lexer.o token.o
-OBJECTS_DEBUG = ast_debug.o lexer_debug.o token_debug.o
+OBJECTS 	  = ast_c.o lexer.o token.o
+OBJECTS_DEBUG = ast_c_debug.o lexer_debug.o token_debug.o

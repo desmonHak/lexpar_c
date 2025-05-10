@@ -18,6 +18,7 @@
 #include "vector-list.h"
 
 #include "global.h"
+#include "token.h"
 
 #ifndef Lexer_t
 typedef struct Lexer_t {

@@ -104,7 +104,7 @@ int main() {
     }
 
     print_tokens(&lexer);
-    print_ast(ast);
+    print_Ast_t(ast);
 
 
     int sequence[] = {4, 3, 8};

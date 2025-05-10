@@ -33,7 +33,7 @@ $(TARGET)_debug.a: $(OBJECTS_DEBUG)
 	$(ARR) $(ARR_FLAGS) $(TARGET).a $^
 	ranlib $(TARGET).a
 
-ast.o: $(PATH_SRC)/ast.c
+ast_c.o: $(PATH_SRC)/ast_c.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 lexer.o: $(PATH_SRC)/lexer.c
@@ -42,7 +42,7 @@ lexer.o: $(PATH_SRC)/lexer.c
 token.o: $(PATH_SRC)/token.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-ast_debug.o: $(PATH_SRC)/ast.c
+ast_c_debug.o: $(PATH_SRC)/ast_c.c
 	$(CC) $(CFLAGS_DEBUG) -c $^ -o $@
 
 lexer_debug.o: $(PATH_SRC)/lexer.c
