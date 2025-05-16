@@ -9,7 +9,7 @@ Lexer_t init_lexer(const char* data, uint64_t size) {
     else c = data[0];
 
     return (Lexer_t){
-        .list_id_tokens = createLinkedList(),
+        .list_id_tokens = createArrayList(0, NULL),
         .hash_table     = NULL,
         .chartter       = c,
         .index          = 0,
@@ -21,8 +21,9 @@ Lexer_t init_lexer(const char* data, uint64_t size) {
 /*
 Permite añadir un token a la lista de tokens
 */
-const position push_token(Lexer_t *lexer, Token_t *token) {
-    return push_back_v(lexer->list_id_tokens, token);
+position push_token(Lexer_t *lexer, Token_t *token) {
+    push_back_a(lexer->list_id_tokens, token);
+    return lexer->size;
 }
 
 /*
@@ -177,12 +178,7 @@ void print_tokens(Lexer_t *lexer) {
         DEBUG_PRINT(DEBUG_LEVEL_ERROR, "#{FG:red}Error: #{FG:white}La lista de tokens no fue inicializada (lexer->list_id_tokens == NULL)\n");
         return;
     }
-    Node *current = lexer->list_id_tokens->head;
-    while (current != NULL) {
-        Token_t *token = (Token_t *)current->data;
-        print_token(token);
-        current = current->next;
-    }
+    forEachNew(lexer->list_id_tokens, (void(*)(void *))print_token);
 }
 
 void build_lexer(Lexer_t *lexer) {
@@ -191,7 +187,7 @@ void build_lexer(Lexer_t *lexer) {
             TYPE_DATA_DBG(Lexer_t*, "lexer = %p")
         END_TYPE_FUNC_DBG,
         lexer);
-    const position size_list_tokens = size_v(lexer->list_id_tokens);
+    const position size_list_tokens = size(lexer->list_id_tokens);
     if (size_list_tokens == 0){
         DEBUG_PRINT(DEBUG_LEVEL_ERROR, "#{FG:red}Error: #{FG:white}No se han encontrado tokens\n");
         return;
@@ -206,7 +202,7 @@ void build_lexer(Lexer_t *lexer) {
 
     for (position i = 0; i < size_list_tokens; i++) {
         // curent = list_id_tokens[i]
-        Token_t*    current = get_element_v(lexer->list_id_tokens, i);
+        Token_t*    current = lexer->list_id_tokens->Array[i];
         if (current == NULL) {
             DEBUG_PRINT(DEBUG_LEVEL_ERROR, "#{FG:red}Error: #{FG:white}No se ha podido obtener el token %d\n", i);
             continue;
@@ -433,7 +429,7 @@ void free_lexer(Lexer_t *lexer) {
     if (lexer->list_id_tokens != NULL) {
 
         // liberar la lista de tokens
-        freeLinkedList(lexer->list_id_tokens);
+        freeArrayList_struct((ArrayList **)&(lexer->list_id_tokens->Array));
     }
     if (lexer->hash_table != NULL) {
         // no es necesario liberar cada valor de las entradas de la tabla hash,

@@ -22,7 +22,7 @@
 
 #ifndef Lexer_t
 typedef struct Lexer_t {
-    LinkedList  *list_id_tokens; // contiene todos los tockens deseados
+    ArrayList  *list_id_tokens; // contiene todos los tockens deseados
     HashTable       *hash_table; // contiene los tokens y su valor
     unsigned char      chartter; // contiene el caracter actual
     uint64_t              index; // contiene el indice del caracter actual
