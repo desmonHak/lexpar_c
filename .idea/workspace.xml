@@ -29,10 +29,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9748094a-0711-41f4-b396-ff0fbbc5a209" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/json.c" beforeDir="false" afterPath="$PROJECT_DIR$/examples/json.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/token.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/token.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +42,9 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/lib/structs_data_C" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -138,7 +138,7 @@
       <workItem from="1746839255769" duration="136000" />
       <workItem from="1746839409688" duration="51000" />
       <workItem from="1746839471963" duration="203000" />
-      <workItem from="1747432468810" duration="4182000" />
+      <workItem from="1747432468810" duration="4845000" />
     </task>
     <servers />
   </component>

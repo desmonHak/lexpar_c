@@ -5,7 +5,7 @@
 
 Token_t* create_token_with_number(const char* name_token, Object value, Token_id type) {
     Token_t *token;
-    debug_malloc(Token_t, token, sizeof(Token_t));
+    debug_calloc(Token_t, token, 1, sizeof(Token_t));
 
     token->value        = value;
     token->type         = type;
@@ -43,7 +43,7 @@ Token_t* create_token_with_autoincrement(
         name_token, value, auto_increment);
 
     Token_t *token;
-    debug_malloc(Token_t, token, sizeof(Token_t));
+    debug_calloc(Token_t, token, 1, sizeof(Token_t));
 
     token->name_token = name_token;
     token->value      = value;
