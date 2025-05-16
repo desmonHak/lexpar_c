@@ -242,6 +242,47 @@ ast_node_t* parse_json_array(Lexer_t* lexer) {
     return arr_node;
 }
 
+// Busca el valor de una clave en un objeto JSON AST
+ast_node_t* get_json_value_by_key(ast_node_t* obj, const char* key) {
+    if (!obj || !obj->ramas) return NULL;
+    size_t n = size_a(obj->ramas);
+    for (size_t i = 0; i < n; ++i) {
+        ast_node_t* key_node = (ast_node_t*)get_element_a(obj->ramas, i);
+        if (!key_node || !key_node->data) continue;
+        if (strcmp((char*)key_node->data, key) == 0) {
+            // El valor está en key_node->ramas[0]->ramas[0]
+            if (size_a(key_node->ramas) > 0) {
+                ast_node_t* colon_node = (ast_node_t*)get_element_a(key_node->ramas, 0);
+                if (size_a(colon_node->ramas) > 0) {
+                    return (ast_node_t*)get_element_a(colon_node->ramas, 0);
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
+
+// Obtiene el nodo del array en la posición idx
+ast_node_t* get_json_array_element(ast_node_t* array, size_t idx) {
+    if (!array || !array->ramas) return NULL;
+    if (idx >= size_a(array->ramas)) return NULL;
+    return (ast_node_t*)get_element_a(array->ramas, idx);
+}
+
+// Busca un valor por ruta tipo "address/city"
+ast_node_t* get_json_value_by_path(ast_node_t* node, const char* path) {
+    char* path_copy = strdup(path);
+    char* token = strtok(path_copy, "/");
+    ast_node_t* current = node;
+    while (token && current) {
+        current = get_json_value_by_key(current, token);
+        token = strtok(NULL, "/");
+    }
+    free(path_copy);
+    return current;
+}
+
 int main() {
 #ifdef _WIN32
     #include <windows.h>
@@ -291,7 +332,42 @@ int main() {
 
     // --- Buscar nodos por valor ---
     printf("Buscando todos los nodos con valor \"Juan\":\n");
-    find_nodes_by_value(json_ast, "Juan");
+    find_nodes_by_value(json_ast, "name");
+
+    ast_node_t* name_value = get_json_value_by_key(json_ast, "name");
+    if (name_value) printf("name: %s\n", (char*)name_value->data);
+
+
+    ast_node_t* grades_node = get_json_value_by_key(json_ast, "grades");
+    if (grades_node) {
+        ast_node_t* first_grade = get_json_array_element(grades_node, 0);
+        if (first_grade) printf("Primer grade: %s\n", (char*)first_grade->data);
+    }
+
+    ast_node_t* city_node = get_json_value_by_path(json_ast, "address/city");
+    if (city_node) printf("city: %s\n", (char*)city_node->data);
+
+
+    ast_node_t* projects_node = get_json_value_by_key(json_ast, "projects");
+    if (projects_node) {
+        for (size_t i = 0; i < size_a(projects_node->ramas); ++i) {
+            ast_node_t* project = (ast_node_t*)get_element_a(projects_node->ramas, i);
+            // Cada project es un objeto, puedes acceder a sus claves:
+            ast_node_t* title_node = get_json_value_by_key(project, "title");
+            ast_node_t* score_node = get_json_value_by_key(project, "score");
+            if (title_node && score_node)
+                printf("Project %zu: %s (%s)\n", i, (char*)title_node->data, (char*)score_node->data);
+        }
+    }
+
+    if (projects_node) {
+        for (size_t i = 0; i < size_a(projects_node->ramas); ++i) {
+            ast_node_t* project = (ast_node_t*)get_element_a(projects_node->ramas, i);
+            ast_node_t* title_node = get_json_value_by_key(project, "title");
+            if (title_node) printf("Proyecto %zu: %s\n", i, (char*)title_node->data);
+        }
+    }
+
 
     // --- Liberar memoria ---
     free_ast_t(json_ast, free); // Si usas strdup, pasa free

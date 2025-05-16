@@ -29,20 +29,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9748094a-0711-41f4-b396-ff0fbbc5a209" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/code.c" beforeDir="false" afterPath="$PROJECT_DIR$/examples/code.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/json.c" beforeDir="false" afterPath="$PROJECT_DIR$/examples/json.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ast_c.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/ast_c.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/structs_data_C" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/structs_data_C/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/structs_data_C/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus/src/colors.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus/src/colors.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast_c.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast_c.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +101,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\C\simple_bytecode\lib\argparse_c\lib\lexpar_c\cmake-build-release" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake Application.json">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -143,7 +138,7 @@
       <workItem from="1746839255769" duration="136000" />
       <workItem from="1746839409688" duration="51000" />
       <workItem from="1746839471963" duration="203000" />
-      <workItem from="1747432468810" duration="3463000" />
+      <workItem from="1747432468810" duration="4182000" />
     </task>
     <servers />
   </component>
