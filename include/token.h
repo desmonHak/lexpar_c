@@ -33,7 +33,7 @@ typedef struct Token_build_t {
     Object      value_process; // valor obtenido en el analisis
 } Token_build_t;
 
-typedef const Token_id (*func_auto_increment)(void);
+typedef Token_id (*func_auto_increment)(void);
 
 
 #ifndef none_name

@@ -22,7 +22,7 @@ ASTNode* createAST(position rootValue, ...) {
     ASTNode* current = root;
 
     position value;
-    while ((value = va_arg(args, position)) != -1) {  
+    while ((value = va_arg(args, position)) != (position)-1) {
         ASTNode* newNode = createNode(value);
         push_back_v(current->ramas, newNode);
         current = newNode;

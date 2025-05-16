@@ -226,7 +226,7 @@ Token_t *get_token(Lexer_t *lexer, const char *value) {
     Token_t * token = get(lexer->hash_table, value);
     if (token == NULL) {
         DEBUG_PRINT(DEBUG_LEVEL_ERROR, "Error: Token no encontrado (self->token == NULL)\n");
-        return NULL;
+        return nullptr;
     }
     return token;
 }
