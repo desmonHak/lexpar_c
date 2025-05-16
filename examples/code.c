@@ -52,7 +52,7 @@ Token_build_t* token_analysis (Lexer_t *lexer) {
 
 }
 
-int calc_ast_vals(Ast_t *ast, Lexer_t *lexer) {
+int calc_ast_vals(ast_t *ast, Lexer_t *lexer) {
     // restaurar el lexer, es necesario para poder seguir operando con el si alguien o algo lo modifico
     restore_lexer(lexer);
 
@@ -110,64 +110,59 @@ int calc_ast_vals(Ast_t *ast, Lexer_t *lexer) {
 
     return val;
 }
+// Crea un nodo de operador con dos hijos
+ast_node_t* create_op_node(const char* op, ast_node_t* left, ast_node_t* right) {
+    ast_node_t* node = create_ast_node_t((void*)op);
+    push_back_a(node->ramas, left);
+    push_back_a(node->ramas, right);
+    return node;
+}
 
+// Crea un nodo de número (hoja)
+ast_node_t* create_num_node(const char* num_str) {
+    return create_ast_node_t((void*)num_str);
+}
 
-int main() {
-    #ifdef _WIN32
-        #include <windows.h>
-        SetConsoleOutputCP(CP_UTF8);
-        SetConsoleCP(CP_UTF8);
-    #endif
+// Construye el AST para la expresión (11 + 23) - (4 * 10) / 2
+ast_node_t* build_example_ast() {
+    ast_node_t* n11 = create_num_node("11");
+    ast_node_t* n23 = create_num_node("23");
+    ast_node_t* n4  = create_num_node("4");
+    ast_node_t* n10 = create_num_node("10");
+    ast_node_t* n2  = create_num_node("2");
 
-    const char datos[] = "11+23-4*10";
-    Lexer_t lexer = init_lexer(datos, sizeof(datos));
+    ast_node_t* plus = create_op_node("+", n11, n23);      // (11 + 23)
+    ast_node_t* mul  = create_op_node("*", n4, n10);       // (4 * 10)
+    ast_node_t* minus = create_op_node("-", plus, mul);    // (11 + 23) - (4 * 10)
+    ast_node_t* root = create_op_node("/", minus, n2);     // ((11 + 23) - (4 * 10)) / 2
 
-    func_auto_increment func = inc_token;
-
-    const position positions_tokens[] = {
-        push_token(&lexer, create_token(create_name_token(token_div),   "-",                                                token_sub)),
-        push_token(&lexer, create_token(create_name_token(token_add),   "+",                                                token_add)),
-        push_token(&lexer, create_token(create_name_token(token_mul),   "*",                                                token_mul)),
-        push_token(&lexer, create_token(create_name_token(token_sub),   "/",                                                token_div)),
-        push_token(&lexer, create_token(create_name_token(token_number),        build_token_special(TOKEN_NUMBER),          inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_id),            build_token_special(TOKEN_ID),              inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_eof),           build_token_special(TOKEN_EOF),             inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_string_simple), build_token_special(TOKEN_STRING_SIMPLE),   inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_string_double), build_token_special(TOKEN_STRING_DOUBLE),   inc_token))
-    };
-    
-    //print_tokens(&lexer);
-
-    // construir el lexer con los tokens
-    build_lexer(&lexer);
-
-    print_Token_build(&lexer, token_analysis);
-    
-    Ast_t *ast = init_ast(&lexer);
-
-    const char* expressions[][3] = {
-        {build_token_special(TOKEN_NUMBER), "-", NULL},
-        {build_token_special(TOKEN_NUMBER), "/", NULL},
-        {build_token_special(TOKEN_NUMBER), "+", NULL},
-        {build_token_special(TOKEN_NUMBER), "*", NULL},
-        {build_token_special(TOKEN_NUMBER), build_token_special(TOKEN_EOF), NULL},
-    };
-
-    // Itera sobre el array y crea las expresiones
-    for (size_t i = 0; i < sizeof(expressions) / sizeof(expressions[0]); i++) {
-        add_expression_to_ast(ast, create_expression(ast, expressions[i][0], expressions[i][1], expressions[i][2]));
+    return root;
+}
+int eval_ast(const ast_node_t* node) {
+    if (!node) return 0;
+    // Si no tiene hijos, es un número
+    if (size_a(node->ramas) == 0) {
+        return atoi((const char*)node->data);
     }
+    // Si tiene hijos, es un operador
+    const char* op = (const char*)node->data;
+    int left = eval_ast(get_element_a(node->ramas, 0));
+    int right = eval_ast(get_element_a(node->ramas, 1));
+    if (strcmp(op, "+") == 0) return left + right;
+    if (strcmp(op, "-") == 0) return left - right;
+    if (strcmp(op, "*") == 0) return left * right;
+    if (strcmp(op, "/") == 0) return left / right;
+    printf("Operador desconocido: %s\n", op); return 0;
+}
+int main() {
+    ast_node_t* ast = build_example_ast();
 
-    print_tokens(&lexer);
-    print_Ast_t(ast);
+    printf("Árbol de la expresión:\n");
+    print_ast_ascii(ast, "", 1);
 
-    
-    printf("valor de la operacion: %d\n", calc_ast_vals(ast, &lexer));
+    int resultado = eval_ast(ast);
+    printf("Resultado: %d\n", resultado);
 
-    freeAst(ast);
-    free_lexer(&lexer);
-
-    puts("exit");
-    puts(datos);
+    free_ast_t(ast, NULL); // O la función de liberación que uses
     return 0;
 }

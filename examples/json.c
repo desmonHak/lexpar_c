@@ -1,127 +1,303 @@
 #include "global.h"
+#include "ast.h"
+#include "token.h"
+#include "lexer.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
 typedef enum names_tokens {
     token_llave_init,
     token_llave_end,
     token_coma,
-    token_doble_punto
+    token_doble_punto,
+    token_corchete_init,
+    token_corchete_end,
+    token_true,
+    token_false,
+    token_null
 } names_tokens;
 
 const Token_id inc_token(void) {
-    static Token_id my_token_id = token_llave_end+1;
+    static Token_id my_token_id = token_null + 1;
     return my_token_id++;
 }
 
-Token_build_t* token_analysis (Lexer_t *lexer) {
-    /*
-        Los elementos de tipo `Token_build_t*` devueltos por esta funcion deben ser liberados
-        con free por parte del programador.
-     */
-    DEBUG_PRINT(DEBUG_LEVEL_INFO,
-        INIT_TYPE_FUNC_DBG(Token_build_t*  , token_analysis)
-            TYPE_DATA_DBG(Lexer_t*, "lexer = %p")
-        END_TYPE_FUNC_DBG,
-        lexer);
+// --- Token analysis para JSON (soporta true, false, null) ---
+Token_build_t* token_analysis(Lexer_t *lexer) {
     Token_build_t* self;
+repeat_switch:
+    if (isdigit(lexer->chartter) || lexer->chartter == '-' || lexer->chartter == '+') {
+        // Reconoce números JSON (enteros y flotantes)
+        size_t start = lexer->index;
+        int has_dot = 0, has_exp = 0;
+        if (lexer->chartter == '-' || lexer->chartter == '+') lexer_advance(lexer);
+        while (isdigit(lexer->chartter)) lexer_advance(lexer);
+        if (lexer->chartter == '.') {
+            has_dot = 1;
+            lexer_advance(lexer);
+            while (isdigit(lexer->chartter)) lexer_advance(lexer);
+        }
+        if (lexer->chartter == 'e' || lexer->chartter == 'E') {
+            has_exp = 1;
+            lexer_advance(lexer);
+            if (lexer->chartter == '-' || lexer->chartter == '+') lexer_advance(lexer);
+            while (isdigit(lexer->chartter)) lexer_advance(lexer);
+        }
+        size_t len = lexer->index - start;
+        char* num_str = (char*)malloc(len + 1);
+        strncpy(num_str, lexer->data + start, len);
+        num_str[len] = 0;
+        Token_build_t* tok = init_token_build(num_str);
+        tok->token = get_token(lexer, build_token_special(TOKEN_NUMBER));
+        return tok;
+    }
 
+    // Reconoce true, false, null
+    if (strncmp(&lexer->data[lexer->index], "true", 4) == 0) {
+        lexer->index += 4;
+        lexer->chartter = lexer->data[lexer->index];
+        self = init_token_build(strdup("true"));
+        self->token = get_token(lexer, "true");
+        return self;
+    }
+    if (strncmp(&lexer->data[lexer->index], "false", 5) == 0) {
+        lexer->index += 5;
+        lexer->chartter = lexer->data[lexer->index];
+        self = init_token_build(strdup("false"));
+        self->token = get_token(lexer, "false");
+        return self;
+    }
+    if (strncmp(&lexer->data[lexer->index], "null", 4) == 0) {
+        lexer->index += 4;
+        lexer->chartter = lexer->data[lexer->index];
+        self = init_token_build(strdup("null"));
+        self->token = get_token(lexer, "null");
+        return self;
+    }
 
-    repeat_switch:
-        if (isdigit(lexer->chartter)) return lexer_parser_number(lexer);
-
-        switch (lexer->chartter)
-        {
+    switch (lexer->chartter) {
         case '"':
         case '\'':
             return lexer_parser_string(lexer);
-        case '{':
-        case '}':
-        case ':':
-        case ',':
+        case '{': case '}':
+        case ':': case ',':
+        case '[': case ']':
             self = init_token_build((Object)&(lexer->chartter));
             self->token = get_token(lexer, (const char[]){lexer->chartter, 0});
             lexer_advance(lexer);
             return self;
-        case '\n':
-        case ' ':
+        case '\n': case ' ':
+        case '\t': case '\r':
             lexer_advance(lexer);
             goto repeat_switch;
         default:
-            printf_color("no definido %d %c\n", lexer->chartter, lexer->chartter);
-            return NULL; 
-        }
+            printf("No definido %d %c\n", lexer->chartter, lexer->chartter);
+            return NULL;
+    }
+}
 
+// --- Impresión personalizada para nodos AST de strings ---
+void print_node_str(ast_t* node, int depth, char* prefix, int is_last) {
+    printf("%s%s%s\n", prefix, is_last ? "└── " : "├── ", (char*)node->data);
+}
+
+// --- Función para obtener el string de un nodo (para búsqueda por ruta) ---
+char* get_str_from_node(ast_t* node) {
+    return (char*)node->data;
+}
+
+// --- Búsqueda por valor (recorre todo el árbol y muestra nodos que coinciden) ---
+void find_nodes_by_value(ast_t* node, const char* value) {
+    if (!node) return;
+    if (node->data && strcmp((char*)node->data, value) == 0) {
+        printf("Nodo encontrado con valor \"%s\": %p\n", value, (void*)node);
+    }
+    size_t num_ramas = size_a(node->ramas);
+    for (size_t i = 0; i < num_ramas; ++i) {
+        find_nodes_by_value((ast_t*)get_element_a(node->ramas, i), value);
+    }
+}
+
+// --- Prototipos ---
+ast_node_t* parse_json_value(Lexer_t* lexer);
+ast_node_t* parse_json_object(Lexer_t* lexer);
+ast_node_t* parse_json_array(Lexer_t* lexer);
+
+// --- peek_token_str robusto ---
+const char* peek_token_str(Lexer_t* lexer) {
+    // Backup solo los campos relevantes
+    uint64_t old_index = lexer->index;
+    unsigned char old_chartter = lexer->chartter;
+
+    Token_build_t* tok = lexer_next_token(lexer, token_analysis);
+    const char* str = strdup((const char*)tok->token->name_token);
+    free(tok);
+
+    lexer->index = old_index;
+    lexer->chartter = old_chartter;
+    return str;
+}
+
+// --- Parseo de valores JSON (objeto, array, string, número, true, false, null) ---
+ast_node_t* parse_json_value(Lexer_t* lexer) {
+    const char* peek = peek_token_str(lexer);
+
+    if (strcmp(peek, "{") == 0) {
+        free((void*)peek);
+        return parse_json_object(lexer);
+    } else if (strcmp(peek, "[") == 0) {
+        free((void*)peek);
+        return parse_json_array(lexer);
+    } else {
+        // string, número, true, false, null
+        Token_build_t* tok = lexer_next_token(lexer, token_analysis);
+        ast_node_t* node = create_ast_node_t(strdup((const char*)tok->value_process));
+        free(tok);
+        free((void*)peek);
+        return node;
+    }
+}
+
+// --- Parseo de objetos JSON ---
+ast_node_t* parse_json_object(Lexer_t* lexer) {
+    Token_build_t* tok = lexer_next_token(lexer, token_analysis); // consume '{'
+    ast_node_t* obj_node = create_ast_node_t(strdup("{"));
+
+    while (1) {
+        const char* peek = peek_token_str(lexer);
+        if (strcmp(peek, "}") == 0) {
+            free((void*)peek);
+            break;
+        }
+        // clave
+        Token_build_t* key_tok = lexer_next_token(lexer, token_analysis);
+        ast_node_t* key_node = create_ast_node_t(strdup((const char*)key_tok->value_process));
+        free(key_tok);
+
+        // :
+        Token_build_t* colon_tok = lexer_next_token(lexer, token_analysis);
+        ast_node_t* colon_node = create_ast_node_t(strdup((const char*)colon_tok->token->name_token));
+        free(colon_tok);
+
+        // valor
+        ast_node_t* value_node = parse_json_value(lexer);
+
+        // Estructura: key -> : -> value
+        push_back_a(key_node->ramas, colon_node);
+        push_back_a(colon_node->ramas, value_node);
+
+        // Agregar al objeto
+        push_back_a(obj_node->ramas, key_node);
+
+        // , o }
+        peek = peek_token_str(lexer);
+        if (strcmp(peek, ",") == 0) {
+            Token_build_t* comma_tok = lexer_next_token(lexer, token_analysis);
+            free(comma_tok);
+        } else if (strcmp(peek, "}") == 0) {
+            free((void*)peek);
+            break;
+        } else {
+            printf("Error de parseo: se esperaba ',' o '}'\n");
+            free((void*)peek);
+            break;
+        }
+    }
+    Token_build_t* end_tok = lexer_next_token(lexer, token_analysis); // consume '}'
+    free(end_tok);
+    return obj_node;
+}
+
+// --- Parseo de arrays JSON ---
+ast_node_t* parse_json_array(Lexer_t* lexer) {
+    Token_build_t* tok = lexer_next_token(lexer, token_analysis); // consume '['
+    ast_node_t* arr_node = create_ast_node_t(strdup("["));
+
+    while (1) {
+        const char* peek = peek_token_str(lexer);
+        if (strcmp(peek, "]") == 0) {
+            free((void*)peek);
+            break;
+        }
+        ast_node_t* value_node = parse_json_value(lexer);
+        push_back_a(arr_node->ramas, value_node);
+
+        peek = peek_token_str(lexer);
+        if (strcmp(peek, ",") == 0) {
+            Token_build_t* comma_tok = lexer_next_token(lexer, token_analysis);
+            free(comma_tok);
+        } else if (strcmp(peek, "]") == 0) {
+            free((void*)peek);
+            break;
+        } else {
+            printf("Error de parseo: se esperaba ',' o ']'\n");
+            free((void*)peek);
+            break;
+        }
+    }
+    Token_build_t* end_tok = lexer_next_token(lexer, token_analysis); // consume ']'
+    free(end_tok);
+    return arr_node;
 }
 
 int main() {
-    #ifdef _WIN32
-        #include <windows.h>
-        SetConsoleOutputCP(CP_UTF8);
-        SetConsoleCP(CP_UTF8);
-    #endif
+#ifdef _WIN32
+    #include <windows.h>
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#endif
 
-    const char datos[] =
-    "{"
-    "   \"name\": \"Juan\","
-    "    \"age\": 20,\n"
-    "}"
-    ;
-    Lexer_t lexer = init_lexer(datos, sizeof(datos));
+    // Cargar archivo JSON
+    FILE* f = fopen("ejemplo.json", "rb");
+    if (f == NULL) {
+        puts("ejemplo.json no encontrado");
+        return 1;
+    }
+    fseek(f, 0, SEEK_END);
+    long sz = ftell(f);
+    rewind(f);
+    char* datos = malloc(sz+1);
+    fread(datos, 1, sz, f);
+    datos[sz] = 0;
+    fclose(f);
 
-    func_auto_increment func = inc_token;
+    Lexer_t lexer = init_lexer(datos, sz);
 
-    const position positions_tokens[] = {
-        push_token(&lexer, create_token(create_name_token(token_llave_init),    "{",                                 token_llave_init)),
-        push_token(&lexer, create_token(create_name_token(token_llave_end),     "}",                                  token_llave_end)),
-        push_token(&lexer, create_token(create_name_token(token_coma),          ",",                                        inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_doble_punto),   ":",                                        inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_number),        build_token_special(TOKEN_NUMBER),          inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_id),            build_token_special(TOKEN_ID),              inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_eof),           build_token_special(TOKEN_EOF),             inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_string_simple), build_token_special(TOKEN_STRING_SIMPLE),   inc_token)),
-        push_token(&lexer, create_token(create_name_token(token_string_double), build_token_special(TOKEN_STRING_DOUBLE),   inc_token))
-    };
+    // --- REGISTRO DE TOKENS ---
+    push_token(&lexer, create_token("{", "{", token_llave_init));
+    push_token(&lexer, create_token("}", "}", token_llave_end));
+    push_token(&lexer, create_token(",", ",", token_coma));
+    push_token(&lexer, create_token(":", ":", token_doble_punto));
+    push_token(&lexer, create_token("[", "[", token_corchete_init));
+    push_token(&lexer, create_token("]", "]", token_corchete_end));
+    push_token(&lexer, create_token("true", "true", token_true));
+    push_token(&lexer, create_token("false", "false", token_false));
+    push_token(&lexer, create_token("null", "null", token_null));
+    push_token(&lexer, create_token(build_token_special(TOKEN_NUMBER), build_token_special(TOKEN_NUMBER), inc_token()));
+    push_token(&lexer, create_token(build_token_special(TOKEN_STRING_SIMPLE), build_token_special(TOKEN_STRING_SIMPLE), inc_token()));
+    push_token(&lexer, create_token(build_token_special(TOKEN_STRING_DOUBLE), build_token_special(TOKEN_STRING_DOUBLE), inc_token()));
+    push_token(&lexer, create_token(build_token_special(TOKEN_EOF), build_token_special(TOKEN_EOF), inc_token()));
+    push_token(&lexer, create_token(build_token_special(TOKEN_ID), build_token_special(TOKEN_ID), inc_token()));
 
-    //print_tokens(&lexer);
-
-    // construir el lexer con los tokens
     build_lexer(&lexer);
 
-    print_Token_build(&lexer, token_analysis);
-    
-    Ast_t *ast = init_ast(&lexer);
+    // --- Parsear el JSON ---
+    ast_node_t* json_ast = parse_json_value(&lexer);
 
-    const char* expressions[][4] = {
-        {build_token_special(TOKEN_STRING_DOUBLE),  ":", build_token_special(TOKEN_STRING_DOUBLE), NULL},
-        {build_token_special(TOKEN_NUMBER),         ":", build_token_special(TOKEN_STRING_DOUBLE), NULL},
-        {build_token_special(TOKEN_STRING_DOUBLE),  ":", build_token_special(TOKEN_NUMBER), NULL},
-        {build_token_special(TOKEN_NUMBER),         ":", build_token_special(TOKEN_NUMBER), NULL},
+    printf("AST del archivo JSON:\n");
+    print_ast(json_ast, inorder_ast_with_ascii);
 
-        {build_token_special(TOKEN_NUMBER),         ":", "{", NULL},
-    };
+    // --- Buscar nodos por valor ---
+    printf("Buscando todos los nodos con valor \"Juan\":\n");
+    find_nodes_by_value(json_ast, "Juan");
 
-    // Itera sobre el array y crea las expresiones
-    for (size_t i = 0; i < sizeof(expressions) / sizeof(expressions[0]); i++) {
-        add_expression_to_ast(ast, create_expression(ast, expressions[i][0], expressions[i][1], expressions[i][2], expressions[i][3]));
-    }
-
-    print_tokens(&lexer);
-    print_Ast_t(ast);
-
-
-    int sequence[] = {4, 3, 8};
-    size_t seq_size = sizeof(sequence) / sizeof(sequence[0]);
-
-    if (is_sequence_in_ast(ast, sequence, seq_size)) {
-        printf("La secuencia está presente en el AST.\n");
-    } else {
-        printf("La secuencia no está presente en el AST.\n");
-    }
-
-    // Liberar la memoria del AST y el Lexer
-    freeAst(ast);
+    // --- Liberar memoria ---
+    free_ast_t(json_ast, free); // Si usas strdup, pasa free
     free_lexer(&lexer);
-
+    free(datos);
 
     puts("exit");
-    puts(datos);
     return 0;
 }
