@@ -29,11 +29,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9748094a-0711-41f4-b396-ff0fbbc5a209" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/include/ast_c.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/ast_c.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/lexer.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/lexer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus" beforeDir="false" afterPath="$PROJECT_DIR$/lib/structs_data_C/DebugLibC/colors-C-C-plus-plus" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +137,7 @@
       <workItem from="1746839255769" duration="136000" />
       <workItem from="1746839409688" duration="51000" />
       <workItem from="1746839471963" duration="203000" />
-      <workItem from="1747432468810" duration="5405000" />
+      <workItem from="1747432468810" duration="7007000" />
     </task>
     <servers />
   </component>
