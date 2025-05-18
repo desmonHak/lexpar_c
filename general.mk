@@ -33,6 +33,9 @@ $(TARGET)_debug.a: $(OBJECTS_DEBUG)
 	$(ARR) $(ARR_FLAGS) $(TARGET).a $^
 	ranlib $(TARGET).a
 
+json_c.o: $(PATH_SRC)/json_c.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
 ast_c.o: $(PATH_SRC)/ast_c.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
@@ -49,6 +52,9 @@ lexer_debug.o: $(PATH_SRC)/lexer.c
 	$(CC) $(CFLAGS_DEBUG) -c $^ -o $@
 
 token_debug.o: $(PATH_SRC)/token.c
+	$(CC) $(CFLAGS_DEBUG) -c $^ -o $@
+
+json_c_debug.o: $(PATH_SRC)/json_c.c
 	$(CC) $(CFLAGS_DEBUG) -c $^ -o $@
 
 cleanobj:
