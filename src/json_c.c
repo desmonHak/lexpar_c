@@ -155,7 +155,7 @@ ast_node_t* parse_json_object(Lexer_t* lexer) {
         if (strcmp(peek, "}") == 0) {
             free((void*)peek);
             break;
-        }
+        } else free((void*)peek);
         // clave
         Token_build_t* key_tok = lexer_next_token(lexer, token_analysis);
         ast_node_t* key_node = create_ast_node_t(strdup((const char*)key_tok->value_process));
@@ -181,6 +181,7 @@ ast_node_t* parse_json_object(Lexer_t* lexer) {
         if (strcmp(peek, ",") == 0) {
             Token_build_t* comma_tok = lexer_next_token(lexer, token_analysis);
             free(comma_tok);
+            free((void*)peek);
         } else if (strcmp(peek, "}") == 0) {
             free((void*)peek);
             break;
@@ -205,14 +206,15 @@ ast_node_t* parse_json_array(Lexer_t* lexer) {
         if (strcmp(peek, "]") == 0) {
             free((void*)peek);
             break;
-        }
+        } else free((void*)peek);
         ast_node_t* value_node = parse_json_value(lexer);
         push_back_a(arr_node->ramas, value_node);
-
+        
         peek = peek_token_str(lexer);
         if (strcmp(peek, ",") == 0) {
             Token_build_t* comma_tok = lexer_next_token(lexer, token_analysis);
             free(comma_tok);
+            free((void*)peek);
         } else if (strcmp(peek, "]") == 0) {
             free((void*)peek);
             break;
@@ -320,8 +322,28 @@ ast_node_t* json_load_file(const char* filename) {
 
 
 
+void free_ast_node(ast_node_t* node) {
+    if (!node) return;
+
+    // Libera recursivamente las ramas
+    if (node->ramas) {
+        size_t n = size_a(node->ramas);
+        for (size_t i = 0; i < n; ++i) {
+            ast_node_t* child = (ast_node_t*)get_element_a(node->ramas, i);
+            free_ast_node(child);
+        }
+        freeArrayListAndElements(&(node->ramas), NULL); // libera la lista de ramas
+    }
+
+    // Libera el dato si es un string duplicado
+    if (node->data) free(node->data);
+
+    // Libera el propio nodo
+    free(node);
+}
+
 void json_free(const ast_node_t* root) {
-    free_ast_t(root, free);
+    free_ast_node(root);
 }
 
 #include <errno.h>
