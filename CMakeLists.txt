@@ -9,7 +9,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Configuraciones específicas por tipo de compilación
-set(CMAKE_C_FLAGS_DEBUG "-g -DDEBUG_ENABLE -O0 -Wall -Wpedantic -D_ExceptionHandler")
+set(CMAKE_C_FLAGS_DEBUG "-g -DDEBUG_ENABLE -O0 -Wall -Wpedantic -D_ExceptionHandler -static")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG  -D_ExceptionHandler")
 
 include_directories(include)
@@ -58,6 +58,7 @@ add_executable(json
         include/global.h
         include/lexer.h
         include/token.h
+        include/json_c.h
         lib/structs_data_C/CIterators/include/CIterators.h
         lib/structs_data_C/CIterators/include/CSortting.h
         lib/structs_data_C/CIterators/src/CIterators.c
@@ -81,5 +82,6 @@ add_executable(json
         lib/structs_data_C/matriz-list.h
         lib/structs_data_C/vector-list.h
         src/ast_c.c
+        src/json_c.c
         src/lexer.c
         src/token.c)

@@ -292,12 +292,16 @@ ast_node_t* json_parse(Lexer_t* lexer) {
 }
 
 ast_node_t* json_load_file(const char* filename) {
+    if (filename == NULL || *filename=='\0') return NULL;
+
     FILE* f = fopen(filename, "rb");
     if (!f) return NULL;
     fseek(f, 0, SEEK_END);
-    long sz = ftell(f);
+    const long sz = ftell(f);
     rewind(f);
-    char* datos = malloc(sz+1);
+    char* datos = calloc(sz+1, sizeof(char));
+    if (datos == NULL) return NULL;
+
     fread(datos, 1, sz, f);
     datos[sz] = 0;
     fclose(f);
@@ -316,7 +320,7 @@ ast_node_t* json_load_file(const char* filename) {
 
 
 
-void json_free(ast_node_t* root) {
+void json_free(const ast_node_t* root) {
     free_ast_t(root, free);
 }
 
@@ -326,7 +330,7 @@ void json_free(ast_node_t* root) {
 // Helper: ¿es un número?
 static int is_number(const char* s) {
     if (!s) return 0;
-    char* endptr;
+    char* endptr = NULL;
     errno = 0;
     strtod(s, &endptr);
     return errno == 0 && endptr != s && *endptr == 0;
@@ -336,6 +340,8 @@ static int is_number(const char* s) {
 
 // Navega el AST usando rutas tipo: projects[1].title o address/address.city
 ast_node_t* json_get_node(ast_node_t* root, const char* path) {
+    if (root == NULL) return NULL;
+    if (path == NULL || *path == '\0') return NULL;
     ast_node_t* current = root;
     const char* p = path;
     char key[256];
@@ -372,18 +378,24 @@ ast_node_t* json_get_node(ast_node_t* root, const char* path) {
 }
 
 const char* json_get_string(ast_node_t* root, const char* path) {
+    if (root == NULL || root->data == NULL) return NULL;
+    if (path == NULL || *path == '\0') return NULL;
     ast_node_t* node = json_get_node(root, path);
     if (!node || !node->data) return NULL;
     return (const char*)node->data;
 }
 
 double json_get_number(ast_node_t* root, const char* path) {
+    if (root == NULL || root->data == NULL) return NAN;
+    if (path == NULL || *path == '\0') return NAN;
     const char* s = json_get_string(root, path);
     if (!is_number(s)) return NAN;
     return strtod(s, NULL);
 }
 
 int json_get_bool(ast_node_t* root, const char* path) {
+    if (root == NULL || root->data == NULL) return -1;
+    if (path == NULL || *path == '\0') return -1;
     const char* s = json_get_string(root, path);
     if (!s) return -1;
     if (strcmp(s, "true") == 0) return 1;

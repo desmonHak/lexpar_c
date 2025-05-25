@@ -66,7 +66,7 @@ void json_init_lexer(Lexer_t* lexer);
 ast_node_t* json_load_file(const char* filename);
 
 // Libera el AST y recursos asociados
-void json_free(ast_node_t* root);
+void json_free(const ast_node_t* root);
 
 // Devuelve el nodo AST correspondiente a una ruta tipo "grades/0/title"
 ast_node_t* json_get_node(ast_node_t* root, const char* path);
