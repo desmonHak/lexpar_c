@@ -11,6 +11,6 @@
 gmon.*
 error_log.txt
 *.a
-cmake-build-debug/*
+cmake-build*
 
 structs_data
