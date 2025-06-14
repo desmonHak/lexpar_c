@@ -33,6 +33,19 @@ typedef struct Token_build_t {
     Object      value_process; // valor obtenido en el analisis
 } Token_build_t;
 
+static inline Token_t* get_token_in_Token_build_t(Token_build_t* token_build) {
+    return token_build->token;
+}
+
+static inline Object* get_value_of_token(Token_build_t* token_build) {
+    return token_build->value_process;
+}
+
+static inline Token_id get_token_type(Token_build_t* token_build) {
+    return token_build->token->type;
+}
+
+
 typedef Token_id (*func_auto_increment)(void);
 
 

@@ -375,11 +375,14 @@ Token_build_t* lexer_parser_string(Lexer_t* lexer){
     return self;
 }
 
+/**
+ * Los elementos de tipo `Token_build_t*` devueltos por esta funcion deben ser liberados
+ *         con free por parte del programador.
+ * @param lexer lexer en del que devolver un token.
+ * @param token_analysis funcion para analizar tokens
+ * @return se devuelve el token en cuestion.
+ */
 Token_build_t* lexer_next_token(Lexer_t* lexer, func_token_analysis token_analysis) {
-    /*
-        Los elementos de tipo `Token_build_t*` devueltos por esta funcion deben ser liberados
-        con free por parte del programador.
-     */
     DEBUG_PRINT(DEBUG_LEVEL_INFO,
         INIT_TYPE_FUNC_DBG(Token_build_t*  , lexer_next_token)
             TYPE_DATA_DBG(Lexer_t*, "lexer = %p")
