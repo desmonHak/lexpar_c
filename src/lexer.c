@@ -437,7 +437,7 @@ void free_lexer(Lexer_t *lexer) {
     if (lexer->hash_table != NULL) {
         // no es necesario liberar cada valor de las entradas de la tabla hash,
         // ya que cada entrada se asociaba con el valor ya liberado de las listas enlazadas
-        freeHashTable(lexer->hash_table);
+        freeHashTable_struct(lexer->hash_table);
     }
 }
 
